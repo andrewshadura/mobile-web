@@ -1,0 +1,40 @@
+@import url(../libs/intel-appframework/css/icons.css);
+@import url(../libs/intel-appframework/css/af.ui.css);
+/*! ReKola stylesheet by Clevisaci | www.clevis.cz */
+/* Mixins */
+/* Settings and variables */
+/* Frameworks */
+/*!
+ * Frontbase by Clevisaci
+ * - a starter fuel for web projects */
+@-ms-viewport {
+  width: device-width;
+}
+
+@media screen and (max-width: 400px) {
+  @-ms-viewport {
+    width: 320px;
+}
+}
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+.accessible {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+svg {
+  max-height: 100%;
+}
+
+/* Web styles */
