@@ -10,5 +10,6 @@
     "tests"
   ],
   "dependencies": {
+    "intel-appframework": "~2.0.0"
   }
 }
