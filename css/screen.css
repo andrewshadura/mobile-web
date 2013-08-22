@@ -38,3 +38,12 @@ svg {
 }
 
 /* Web styles */
+#splashscreen {
+  display: table;
+  height: 100%;
+}
+#splashscreen .wrap {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
