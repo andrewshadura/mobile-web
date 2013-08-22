@@ -37,10 +37,20 @@ var LoginView = BasePanelView.extend({
 			success: function(data) {
 				console.log('Response: ', data);
 				app.logged = true;
+				router.go('nearby');
 				$.ui.hideMask();
 			}
 		})
 	}
+});
+
+var BikesNearbyView = BasePanelView.extend({
+	attributes: {
+		title: 'Kola okolo'
+	},
+	id: 'bikesNearby',
+
+	template: _.template($('#template-bikesnearby').html())
 });
 
 /* Application controller */
@@ -56,6 +66,11 @@ var AppController = Backbone.View.extend({
 		this.$el.append(view.render().el);
 		$.ui.loadContent('#'+view.id, true, false, 'none');
 	},
+	renderBikesNearby: function() {
+		var view = new BikesNearbyView();
+		this.$el.append(view.render().el);
+		$.ui.loadContent('#'+view.id, true, false, 'slide');
+	}
 });
 
 
@@ -63,6 +78,7 @@ var AppRouter = Backbone.Router.extend({
 	routes: {
 		'': 'index',
 		'login': 'login',
+		'nearby': 'nearby',
 		'*path':  'index'
 	},
 
@@ -75,6 +91,10 @@ var AppRouter = Backbone.Router.extend({
 	login: function() {
 		console.log('router: login');
 		app.renderLogin();
+	},
+	nearby: function() {
+		console.log('router: nearby');
+		app.renderBikesNearby();
 	},
 
 	// Alias for navigation
