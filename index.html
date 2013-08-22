@@ -10,9 +10,11 @@
 		<link rel="stylesheet" type="text/css" href="css/screen.css" />
 
 		<script type="text/javascript" charset="utf-8" src="libs/intel-appframework/ui/appframework.ui.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="libs/underscore/underscore-min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="libs/backbone/backbone-min.js"></script>
 
-		<!-- include touch on desktop browsers only -->
 		<script>
+			/* include touch on desktop browsers only */
 			if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
 				var script = document.createElement("script");
 				script.src = "libs/intel-appframework/plugins/af.desktopBrowsers.js";
@@ -22,11 +24,21 @@
 				$.os.desktop = true;
 			}
 
+			var REKOLA = {};
+			REKOLA.baseUrl = document.location.href.replace(document.location.protocol + '//' + document.location.host, '');
+			REKOLA.remoteUrl = 'http://private-ea86-rekola.apiary.io';
 		</script>
+
+		<script type="text/javascript" charset="utf-8" src="app.js"></script>
+
 		<script type="text/javascript">
 
-			var webRoot = "./";
 			$.ui.autoLaunch = false; //By default, it is set to true and you're app will run right away.  We set it to false to show a splashscreen
+			$.ui.manageHistory = false;
+			$.ui.loadDefaultHash = false;
+			$.ui.showBackButton = false;
+			$.ui.showNavMenu = false;
+
 			/* This function runs when the body is loaded.*/
 			var init = function () {
 					$.ui.backButtonText = "Zpět";// We override the back button text to always say "Back"
@@ -35,23 +47,14 @@
 					}, 1500);//We wait 1.5 seconds to call $.ui.launch after DOMContentLoaded fires
 				};
 			document.addEventListener("DOMContentLoaded", init, false);
+
 			$.ui.ready(function () {
 				//This function will get executed when $.ui.launch has completed
 				$.ui.removeFooterMenu();
+
 			});
-
-
-			/* This code is used for native apps */
-			var onDeviceReady = function () {
-					AppMobi.device.setRotateOrientation("portrait");
-					AppMobi.device.setAutoRotate(false);
-					webRoot = AppMobi.webRoot + "/";
-					//hide splash screen
-					AppMobi.device.hideSplashScreen();
-
-			};
-			document.addEventListener("appMobi.device.ready", onDeviceReady, false);
 		</script>
+
 	</head>
 
 	<body>
@@ -69,24 +72,7 @@
 					</div>
 				</div>
 
-				<div title='Welcome' id="login" class="panel" selected="true">
-					<input type="text" placeholder="Jméno">
-					<input type="password" placeholder="Heslo">
-					<a href="#bikesNearby" class="button slate">Přihlásit se</a>
-
-					<p>
-						<a class="button" href="#aboutApp">O projektu</a>
-						<a class="button" href="#howtoLogin">Jak se přihlásit</a>
-					</p>
-				</div>
-
-				<div title="Kola okolo" id="bikesNearby" class="panel">
-					<ul class="list">
-						<li><a href="#bike">Kolo 1</a></li>
-						<li><a href="#bike">Kolo 2</a></li>
-						<li><a href="#bike">Kolo 3</a></li>
-					</ul>
-				</div>
+				<!--
 
 				<div title="Kolo 234" id="bike" class="panel">
 					mapa<br>
@@ -101,9 +87,11 @@
 				</div>
 				<div title="Jak se přihlásit" id="howtoLogin" class="panel">
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, dolore, ea sint et ut rerum unde. Illo, voluptate, molestiae reprehenderit vero quisquam ipsa quis assumenda vel asperiores. Adipisci, voluptatem, explicabo.</p>
-				</div>
+				</div> -->
 
 			</div>
 		</div>
+
+		<!-- Templates -->
 	</body>
 </html>

@@ -38,6 +38,10 @@ svg {
 }
 
 /* Web styles */
+#navbar, #backButton {
+  display: none !important;
+}
+
 #splashscreen {
   display: table;
   height: 100%;
