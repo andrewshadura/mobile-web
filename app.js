@@ -110,7 +110,7 @@ $.ui.ready(function() {
 	router = new AppRouter();
 
 	Backbone.history.start({
-		pushState: true,
+		pushState: false, // because of problematic hosting handling
 		root: REKOLA.baseUrl
 	});
 	console.log('app.js:init done');
