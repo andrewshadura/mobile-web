@@ -25,8 +25,9 @@
 			}
 
 			var REKOLA = {};
-			REKOLA.baseUrl = document.location.href.replace(document.location.protocol + '//' + document.location.host, '');
-			REKOLA.remoteUrl = 'http://private-ea86-rekola.apiary.io';
+			REKOLA.baseUrl = document.location.href.replace(document.location.protocol + '//' + document.location.host, '').replace(document.location.hash, '');
+			REKOLA.remoteUrl = 'http://private-eb5f-roboclevis.apiary.io';
+			console.log(REKOLA);
 		</script>
 
 		<script type="text/javascript" charset="utf-8" src="app.js"></script>
