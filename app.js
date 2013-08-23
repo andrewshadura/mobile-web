@@ -36,6 +36,14 @@ var LoginView = BasePanelView.extend({
 		'click .button-login': 'doLogin'
 	},
 
+	initialize: function() {
+		var apiKey = localStorage.getItem('X-Api-Key');
+		if(apiKey){
+			app.logged = true;
+			router.go('index');
+		}
+	},
+
 	doLogin: function(e) {
 		e.preventDefault();
 		var username = this.$('.username').val();
@@ -49,7 +57,7 @@ var LoginView = BasePanelView.extend({
 			success: function(data) {
 				console.log('Response: ', data);
 				app.logged = true;
-				localStorage.setItem('X-Api-Key', '');
+				localStorage.setItem('X-Api-Key', 'smth');
 				router.go('index');
 				$.ui.hideMask();
 			}
