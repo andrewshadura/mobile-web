@@ -118,7 +118,61 @@ var AppController = Backbone.View.extend({
 		var view = new BikesNearbyView();
 		this.$el.append(view.render().el);
 		$.ui.loadContent('#'+view.id, true, false, 'slide');
+	},
+
+	geolocate: function(callback) {
+		var that = this;
+		$.ui.showMask('Lokalizuji...');
+
+		var success = function(position) {
+			console.log('Geolocated: ', position);
+			that.userPosition = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			};
+			// localStorage.setItem('lastPosition', that.userPosition);
+			$.ui.hideMask();
+			callback(that.userPosition);
+		};
+		var error = function(err) {
+			if(err.code == 1) {
+				console.log('Geolocation error: Access is denied!');
+			} else if(err.code == 2) {
+				console.log('Geolocation error: Position is unavailable!');
+			}
+			// Prompt for address and try to geocode it to GPS
+			var manualLocation = prompt('Lokalizace se nezdařila, zadej prosím tvojí adresu ručně:', '' /*localStorage.getItem('lastPosition')*/);
+			geocode(manualLocation);
+		};
+		var geocode = function(address) {
+			var geocoder = new google.maps.Geocoder();
+
+			geocoder.geocode({
+				address: address
+			}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					var bestPosition = results[0].geometry.location;
+					success({
+						coords: {
+							latitude: bestPosition.lat(),
+							longitude: bestPosition.lng()
+						}
+					});
+				} else {
+					error();
+				}
+			});
+		};
+
+		if(!navigator.geolocation) {
+			console.error('Browser doesn\'t support geolocation.');
+			error();
+		} else {
+			navigator.geolocation.getCurrentPosition(success, error);
+		}
+
 	}
+
 });
 
 
