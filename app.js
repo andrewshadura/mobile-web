@@ -83,10 +83,7 @@ var AppRouter = Backbone.Router.extend({
 	},
 
 	index: function() {
-		console.log('router: index');
-		if(!app.logged){
-			this.go('login');
-		}
+		this.go('nearby');
 	},
 	login: function() {
 		console.log('router: login');
@@ -100,7 +97,24 @@ var AppRouter = Backbone.Router.extend({
 	// Alias for navigation
 	go: function(where) {
 		this.navigate(where, {trigger: true});
-	}
+	},
+	// Route override for checking user authentication
+	route: function(route, name, callback) {
+		var router = this;
+		if (!callback) callback = this[name];
+		var f = function() {
+			// before route
+			if(!app.logged && route != 'login'){
+				this.go('login');
+				return false;
+			}
+			// actual routing
+			callback.apply(router, arguments);
+			// after route
+		};
+		return Backbone.Router.prototype.route.call(this, route, name, f);
+	},
+
 });
 
 
