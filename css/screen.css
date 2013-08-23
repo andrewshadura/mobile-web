@@ -48,7 +48,9 @@ svg {
 
 #splashscreen {
   display: table;
+  width: 100%;
   height: 100%;
+  text-align: center;
 }
 #splashscreen .wrap {
   display: table-cell;
