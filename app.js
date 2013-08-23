@@ -116,4 +116,16 @@ $.ui.ready(function() {
 	console.log('app.js:init done');
 });
 
+// Tell jQuery to watch for any 401 or 403 errors and handle them appropriately
+/*$.ajaxSetup({
+	statusCode: {
+		401: function(){
+			app.go('login'); // Redirec the to the login page.
+		},
+		403: function() {
+			app.go('denied'); // 403 -- Access denied
+		}
+	}
+});*/
+
 });
