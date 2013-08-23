@@ -2,6 +2,17 @@ $(function() {
 // Main app instances
 var app, router;
 
+/* Models */
+var Bike = Backbone.Model.extend({
+});
+
+/* Collections */
+var BikeList = Backbone.Collection.extend({
+	model: Bike
+});
+
+var Bikes = new BikeList;
+
 /* Views */
 var BaseView = Backbone.View.extend({
 	render: function() {
