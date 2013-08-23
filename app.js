@@ -30,6 +30,7 @@ var LoginView = BasePanelView.extend({
 		var username = this.$('.username').val();
 		var password = this.$('.password').val();
 		$.ui.showMask('Přihlašuji...');
+		// @TODO waits for API specs
 		$.ajax({
 			type: 'post',
 			url: REKOLA.remoteUrl + '/accounts/mine/ping',
@@ -37,7 +38,8 @@ var LoginView = BasePanelView.extend({
 			success: function(data) {
 				console.log('Response: ', data);
 				app.logged = true;
-				router.go('nearby');
+				localStorage.setItem('X-Api-Key', '');
+				router.go('index');
 				$.ui.hideMask();
 			}
 		})
