@@ -98,14 +98,25 @@ var BikesNearbyView = BasePanelView.extend({
 	},
 	id: 'bikesNearby',
 
-	template: _.template($('#template-bikesnearby').html())
+	template: _.template($('#template-bikesnearby').html()),
+
+	render: function() {
+		this.$el.html(this.template({
+			myPosition: app.userPosition.lat + ', ' + app.userPosition.lng
+		}));
+		return this;
+	}
+
 });
 
 /* Application controller */
 
 var AppController = Backbone.View.extend({
 	el: $('#content'),
+
 	logged: false,
+	userPosition: false,
+
 	initialize: function() {
 
 	},
@@ -115,9 +126,15 @@ var AppController = Backbone.View.extend({
 		$.ui.loadContent('#'+view.id, true, false, 'none');
 	},
 	renderBikesNearby: function() {
-		var view = new BikesNearbyView();
-		this.$el.append(view.render().el);
-		$.ui.loadContent('#'+view.id, true, false, 'slide');
+		var that = this;
+		this.geolocate(function() {
+			var view = new BikesNearbyView();
+			if(that.$('#'+view.id).size() > 0){
+				that.$('#'+view.id).remove();
+			}
+			that.$el.append(view.render().el);
+			$.ui.loadContent('#'+view.id, true, false, 'slide');
+		});
 	},
 
 	geolocate: function(callback) {
