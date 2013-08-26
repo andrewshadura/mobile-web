@@ -19,30 +19,37 @@ var AppController = Backbone.View.extend({
 	initialize: function(options) {
 		console.log('AppController init', options);
 	},
+
+	renderSubview: function(view, animation) {
+		this.$('#'+view.id).remove(); // remove old element
+		this.$el.append(view.render().el); // place a new one
+		$.ui.loadContent('#'+view.id, true, false, animation ? animation : 'slide'); // navigate UI to this panel
+	},
+
 	renderLogin: function() {
 		var view = new LoginView({app: this});
-		this.$el.append(view.render().el);
-		$.ui.loadContent('#'+view.id, true, false, 'none');
+		this.renderSubview(view, 'none');
 	},
 	renderBikesNearby: function() {
-		var that = this;
 		var bikes = new BikeList();
-
-		this.geolocate(function() {
-
-			bikes.fetch({data: {
-				latitude: that.userPosition.lat,
-				longitude: that.userPosition.lng
-			}});
-
-			var view = new BikesNearbyView({
-				app: that,
-				model: bikes
-			});
-
-			that.$el.append(view.render().el);
-			$.ui.loadContent('#'+view.id, true, false, 'slide');
+		var view = new BikesNearbyView({
+			app: this,
+			model: bikes
 		});
+		this.renderSubview(view);
+
+		this.geolocate(function(pos) {
+			bikes.fetch({
+				data: {
+					latitude: pos.lat,
+					longitude: pos.lng
+				},
+				success: function() {
+					view.render();
+				}
+			});
+		});
+
 	},
 
 	geolocate: function(callback) {
