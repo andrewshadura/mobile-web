@@ -17,7 +17,7 @@ var AppController = Backbone.View.extend({
 	userPosition: false,
 
 	initialize: function(options) {
-
+		console.log('AppController init', options);
 	},
 	renderLogin: function() {
 		var view = new LoginView({app: this});
@@ -26,11 +26,20 @@ var AppController = Backbone.View.extend({
 	},
 	renderBikesNearby: function() {
 		var that = this;
+		var bikes = new BikeList();
+
 		this.geolocate(function() {
-			var view = new BikesNearbyView({app: that});
-			if(that.$('#'+view.id).size() > 0){
-				that.$('#'+view.id).remove();
-			}
+
+			bikes.fetch({data: {
+				latitude: that.userPosition.lat,
+				longitude: that.userPosition.lng
+			}});
+
+			var view = new BikesNearbyView({
+				app: that,
+				model: bikes
+			});
+
 			that.$el.append(view.render().el);
 			$.ui.loadContent('#'+view.id, true, false, 'slide');
 		});

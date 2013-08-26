@@ -84,10 +84,14 @@
 		</script>
 		<script type="text/template" id="template-bikesnearby">
 			<p>Pozice: <%- myPosition %></p>
-			<ul class="list">
-				<li><a href="#">Kolo 1</a></li>
-				<li><a href="#">Kolo 2</a></li>
-				<li><a href="#">Kolo 3</a></li>
+			<ul class="list bikesList">
+				<% _.each(bikes, function(bike){ %>
+					<li><a class="bikeDetail" href="#bikeDetail" data-id="<%- bike.id %>">
+						<span class="type"><%- bike.type %></span>
+						<span class="distance"><%- bike.distance %></span>
+						<span class="address"><%- bike.address %></span>
+					</a></li>
+				<% }); %>
 			</ul>
 		</script>
 

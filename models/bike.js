@@ -1,5 +1,9 @@
 var Bike = Backbone.Model.extend({
 
+	url: function() {
+		return this.id ? '/bikes/' + this.id : '/bikes';
+	},
+
 	defaults: function() {
 		return {
 			/*id: 0,*/

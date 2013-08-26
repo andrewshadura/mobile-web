@@ -61,3 +61,14 @@ svg {
   vertical-align: middle;
   text-align: center;
 }
+
+.bikesList .type {
+  font-size: 0.7em;
+}
+.bikesList .distance {
+  font-weight: bold;
+}
+.bikesList .address {
+  float: right;
+  padding-right: 10px;
+}
