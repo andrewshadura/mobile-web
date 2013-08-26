@@ -206,6 +206,30 @@ var AppController = Backbone.View.extend({
 			navigator.geolocation.getCurrentPosition(success, error);
 		}
 
+	},
+
+	/**
+	 * Handle AJAX errors for authentication and other errors
+	 * @param  {XMLHttpRequest} xhr  [description]
+	 * @param  {String} type [description]
+	 */
+	ajaxError: function(xhr, type) {
+		switch (type){
+			case 'parsererror':
+				console.error('AJAX parse error', xhr);
+				break;
+			case 'error':
+				console.log('AJAX error', xhr);
+				if(xhr.status == 401){
+					app.go('login'); // Redirec the to the login page.
+				} else if(xhr.status == 403){
+					app.go('denied'); // 403 -- Access denied
+				}
+				break;
+			case 'timeout':
+				console.error('AJAX timeout error', xhr);
+				break;
+		}
 	}
 
 });
@@ -266,17 +290,5 @@ $.ui.ready(function() {
 	});
 	console.log('app.js:init done');
 });
-
-// Tell jQuery to watch for any 401 or 403 errors and handle them appropriately
-/*$.ajaxSetup({
-	statusCode: {
-		401: function(){
-			app.go('login'); // Redirec the to the login page.
-		},
-		403: function() {
-			app.go('denied'); // 403 -- Access denied
-		}
-	}
-});*/
 
 });
