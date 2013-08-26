@@ -75,22 +75,22 @@
 		<script type="text/template" id="template-login">
 			<input class="username" type="text" placeholder="Jméno">
 			<input class="password" type="password" placeholder="Heslo">
-			<a href="#" class="button slate button-login">Přihlásit se</a>
+			<a class="button slate button-login">Přihlásit se</a>
 
 			<p>
-				<a class="button" href="#aboutApp">O projektu</a>
-				<a class="button" href="#howtoLogin">Jak se přihlásit</a>
+				<a class="button">O projektu</a>
+				<a class="button">Jak se přihlásit</a>
 			</p>
 		</script>
-		<script type="text/template" id="template-bikesnearby">
 
+		<script type="text/template" id="template-bikesnearby">
 			<% if(position) { %>
 				<p class="position">Pozice: <%- position %></p>
 			<% } %>
 
 			<ul class="list bikesList">
 				<% _.each(bikes, function(bike){ %>
-					<li><a class="bikeDetail" href="#bikeDetail" data-id="<%- bike.id %>">
+					<li><a class="bikeDetail" data-id="<%- bike.id %>">
 						<span class="type"><%- bike.type %></span>
 						<span class="distance"><%- bike.distance %></span>
 						<span class="address"><%- bike.address %></span>
@@ -98,6 +98,7 @@
 				<% }); %>
 			</ul>
 		</script>
+
 		<script type="text/template" id="template-bikedetail">
 			<%- bike.toJSON() %>
 		</script>
