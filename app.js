@@ -64,7 +64,7 @@ var LoginView = BasePanelView.extend({
 	},
 
 	initialize: function() {
-		var apiKey = localStorage.getItem('X-Api-Key');
+		var apiKey = localStorage.getItem('apiKey');
 		if(apiKey){
 			app.logged = true;
 			router.go('index');
@@ -78,19 +78,37 @@ var LoginView = BasePanelView.extend({
 		$.ui.showMask('Přihlašuji...');
 		// @TODO waits for API specs
 		$.ajax({
-			type: 'post',
-			url: REKOLA.remoteUrl + '/accounts/mine/ping',
-			headers: {"Authorization": "Basic " + window.btoa(username + ":" + password)},
-			success: function(data) {
-				console.log('Response: ', data);
-				app.logged = true;
-				localStorage.setItem('X-Api-Key', 'smth');
-				router.go('index');
+			type: 'POST',
+			url: REKOLA.remoteUrl + '/accounts/mine/login',
+			contentType: 'application/json',
+			dataType: 'json',
+			data: {
+				'data': {
+					'username': username,
+					'password': password
+				}
+			},
+			success: function(result) {
+				console.log('Response: ', result);
+				if(result.data && result.data.apiKey){
+					localStorage.setItem('apiKey', result.data.apiKey);
+					app.logged = true;
+					router.go('index');
+				} else {
+					alert('Přihlášení se nezdařilo, zkuste to znovu.');
+				}
+				$.ui.hideMask();
+			},
+			error: function(xhr) {
+				console.error('Login failed', xhr);
+				alert('Přihlášení se nezdařilo, zkuste to znovu.');
 				$.ui.hideMask();
 			}
-		})
+		});
 	}
+
 });
+
 
 var BikesNearbyView = BasePanelView.extend({
 	attributes: {
