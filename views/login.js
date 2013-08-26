@@ -22,7 +22,6 @@ var LoginView = BasePanelView.extend({
 
 	doLogin: function(e) {
 		var that = this;
-		e.preventDefault();
 		var username = this.$('.username').val();
 		var password = this.$('.password').val();
 		$.ui.showMask('Přihlašuji...');
@@ -53,6 +52,8 @@ var LoginView = BasePanelView.extend({
 				$.ui.hideMask();
 			}
 		});
+
+		return false;
 	}
 
 });
