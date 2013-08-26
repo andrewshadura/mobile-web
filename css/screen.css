@@ -62,6 +62,9 @@ svg {
   text-align: center;
 }
 
+.bikesList a:active, .bikesList a:focus {
+  background-color: lightyellow;
+}
 .bikesList .type {
   font-size: 0.7em;
 }

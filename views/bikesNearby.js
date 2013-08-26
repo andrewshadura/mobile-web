@@ -28,7 +28,7 @@ var BikesNearbyView = BasePanelView.extend({
 	},
 
 	bikeDetail: function(e) {
-		this.options.app.go('bike/' + $(e.target).data('id'));
+		this.options.app.go('bike/' + $(e.currentTarget).data('id'));
 		return false;
 	}
 

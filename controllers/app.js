@@ -8,6 +8,7 @@ var BikeList = require('models/bikeList');
 var BasePanelView = require('views/basePanel');
 var LoginView = require('views/login');
 var BikesNearbyView = require('views/bikesNearby');
+var BikeDetailView = require('views/bikeDetail');
 
 /* Application controller */
 var AppController = Backbone.View.extend({
@@ -49,9 +50,15 @@ var AppController = Backbone.View.extend({
 				}
 			});
 		});
+
+		this.bikes = bikes;
 	},
 	renderBikeDetail: function(id) {
-
+		var bike = this.bikes.get(id);
+		var view = new BikeDetailView({
+			model: bike
+		});
+		this.renderSubview(view);
 	},
 
 	geolocate: function(callback) {
