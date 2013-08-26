@@ -46,6 +46,10 @@ svg {
   padding-top: 10px !important;
 }
 
+.button {
+  display: block !important;
+}
+
 #splashscreen {
   display: table;
   width: 100%;
