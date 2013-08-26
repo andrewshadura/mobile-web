@@ -83,7 +83,11 @@
 			</p>
 		</script>
 		<script type="text/template" id="template-bikesnearby">
-			<p>Pozice: <%- myPosition %></p>
+
+			<% if(position) { %>
+				<p class="position">Pozice: <%- position %></p>
+			<% } %>
+
 			<ul class="list bikesList">
 				<% _.each(bikes, function(bike){ %>
 					<li><a class="bikeDetail" href="#bikeDetail" data-id="<%- bike.id %>">
@@ -93,6 +97,9 @@
 					</a></li>
 				<% }); %>
 			</ul>
+		</script>
+		<script type="text/template" id="template-bikedetail">
+			<%- bike.toJSON() %>
 		</script>
 
 		<script type="text/javascript" charset="utf-8" src="init.js"></script>
