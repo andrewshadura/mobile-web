@@ -6,6 +6,7 @@ var AppRouter = Backbone.Router.extend({
 		'': 'index',
 		'login': 'login',
 		'nearby': 'nearby',
+		'bike/:id': 'detail',
 		'*path':  'index'
 	},
 
@@ -23,6 +24,10 @@ var AppRouter = Backbone.Router.extend({
 	nearby: function() {
 		console.log('router: nearby');
 		this.options.app.renderBikesNearby();
+	},
+	detail: function(id) {
+		console.log('router: detail', id);
+		this.options.app.renderBikeDetail(id);
 	},
 
 	// Alias for navigation

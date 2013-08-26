@@ -49,6 +49,8 @@ var AppController = Backbone.View.extend({
 				}
 			});
 		});
+	},
+	renderBikeDetail: function(id) {
 
 	},
 
