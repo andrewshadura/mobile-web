@@ -16,6 +16,12 @@
 		<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
 
 		<script>
+			/* REKOLA Namespace */
+			var REKOLA = {};
+			REKOLA.baseUrl = document.location.href.replace(document.location.protocol + '//' + document.location.host, '').replace(document.location.hash, '');
+			REKOLA.remoteUrl = 'http://private-eb5f-roboclevis.apiary.io';
+			console.log('REKOLA', REKOLA);
+
 			/* include touch on desktop browsers only */
 			if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
 				var script = document.createElement("script");
@@ -25,37 +31,8 @@
 				// $.os.ios = true;
 				$.os.desktop = true;
 			}
-
-			var REKOLA = {};
-			REKOLA.baseUrl = document.location.href.replace(document.location.protocol + '//' + document.location.host, '').replace(document.location.hash, '');
-			REKOLA.remoteUrl = 'http://private-eb5f-roboclevis.apiary.io';
-			console.log(REKOLA);
 		</script>
 
-		<script type="text/javascript" charset="utf-8" src="app.js"></script>
-
-		<script type="text/javascript">
-
-			$.ui.autoLaunch = false; //By default, it is set to true and you're app will run right away.  We set it to false to show a splashscreen
-			$.ui.manageHistory = false;
-			$.ui.loadDefaultHash = false;
-			$.ui.backButtonText = "Zpět";
-			$.ui.showBackButton = false;
-			$.ui.showNavMenu = false;
-
-			/* This function runs when the body is loaded.*/
-			document.addEventListener("DOMContentLoaded", function() {
-					setTimeout(function() {
-						$.ui.launch();
-					}, 1000);
-			}, false);
-
-			//This function will get executed when $.ui.launch has completed
-			$.ui.ready(function () {
-				$.ui.removeFooterMenu();
-			});
-
-		</script>
 
 	</head>
 
@@ -114,5 +91,6 @@
 			</ul>
 		</script>
 
+		<script type="text/javascript" charset="utf-8" src="init.js"></script>
 	</body>
 </html>
