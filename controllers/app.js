@@ -52,6 +52,9 @@ var AppController = Backbone.View.extend({
 				},
 				success: function() {
 					view.render();
+				},
+				error: function(model, xhr) {
+					that.ajaxError(xhr, 'error');
 				}
 			});
 		});
@@ -134,7 +137,7 @@ var AppController = Backbone.View.extend({
 				console.error('AJAX parse error', xhr);
 				break;
 			case 'error':
-				console.log('AJAX error', xhr);
+				console.error('AJAX error', xhr);
 				if(xhr.status == 401){
 					this.logged = false;
 					this.go('login'); // Redirec the to the login page.
