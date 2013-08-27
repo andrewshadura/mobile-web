@@ -21,6 +21,7 @@
 			REKOLA.baseUrl = document.location.href.replace(document.location.protocol + '//' + document.location.host, '').replace(document.location.hash, '');
 			REKOLA.remoteUrl = 'http://private-eb5f-roboclevis.apiary.io';
 			REKOLA.apiKey = 'REKOLA-apiKey';
+			REKOLA.rentedBike = 'REKOLA-rentedBike';
 			console.log('REKOLA', REKOLA);
 
 			/* include touch on desktop browsers only */
@@ -109,6 +110,15 @@
 			<p class="note">
 				<%- JSON.stringify(bike) %>
 			</p>
+			<a class="button slate button-getcode">Půjčit si kolo</a>
+		</script>
+
+		<script type="text/template" id="template-bikecode">
+			<input type="text" class="code" placeholder="identifikátor kola">
+			<a class="button slate button-getcode">Získat kód zámku</a>
+			<p>Opište identifikátor z tabulky na kole a získáte kód zámku.</p>
+			<p>Od té chvíle máte kolo půjčené.</p>
+			<a class="button button-howitworks">Jak přesně to funguje</a>
 		</script>
 
 		<script type="text/javascript" charset="utf-8" src="init.js"></script>

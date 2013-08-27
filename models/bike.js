@@ -1,7 +1,7 @@
 var Bike = Backbone.Model.extend({
 
 	url: function() {
-		return this.id ? '/bikes/' + this.id : '/bikes';
+		return '/bikes/' + this.id;
 	},
 
 	defaults: function() {
@@ -15,20 +15,18 @@ var Bike = Backbone.Model.extend({
 		}
 	},
 
-	borrow: function(bikeCode) {
-		this.state = 'mine';
-		// ...
-		return this._getUnlockCode(bikeCode);
+	rent: function(bikeCode, unlockCode) {
+		this.set({
+			bikeCode: bikeCode,
+			unlockCode: unlockCode,
+			rented: true
+		});
+		localStorage.setItem(REKOLA.rentedBike, JSON.stringify(this.toJSON()));
 	},
 
 	putBack: function(bikePosition, note) {
 		// ...
 	},
-
-	_getUnlockCode: function(bikeCode) {
-		// ...
-		return '12345'
-	}
 
 });
 

@@ -9,6 +9,7 @@ var BasePanelView = require('views/basePanel');
 var LoginView = require('views/login');
 var BikesNearbyView = require('views/bikesNearby');
 var BikeDetailView = require('views/bikeDetail');
+var BikeCodeView = require('views/bikeCode');
 
 /* Application controller */
 var AppController = Backbone.View.extend({
@@ -67,6 +68,19 @@ var AppController = Backbone.View.extend({
 	renderBikeDetail: function(id) {
 		var bike = this.bikes.get(id);
 		var view = new BikeDetailView({
+			app: this,
+			model: bike
+		});
+		this.renderSubview(view);
+	},
+	renderBikeCode: function(id) {
+		var bike = this.bikes.get(id);
+		var view = new BikeCodeView({
+			app: this,
+			model: bike
+		});
+		this.renderSubview(view);
+	},
 			model: bike
 		});
 		this.renderSubview(view);
