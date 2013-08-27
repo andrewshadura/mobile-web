@@ -2,16 +2,24 @@ var BasePanelView = require('views/basePanel');
 
 var BikeDetailView = BasePanelView.extend({
 	attributes: {
-		title: function() {
-			return 'Kolo' + this.model.id;
-		}
+		title: 'Kolo'
 	},
 	id: 'bikeDetail',
 
 	template: _.template($('#template-bikedetail').html()),
 
+	events: {
+		'click .button-getcode': 'goGetcode'
+	},
+
 	initialize: function(options) {
 		console.log('BikeDetailView init', options);
+		this.$el.attr('title', 'Kolo ' + this.model.get('id'));
+	},
+
+	goGetcode: function(e) {
+		this.options.app.go('bike/' + this.model.get('id') + '/getcode');
+		return false;
 	},
 
 	initMap: function() {
