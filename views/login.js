@@ -13,7 +13,7 @@ var LoginView = BasePanelView.extend({
 	},
 
 	initialize: function() {
-		var apiKey = localStorage.getItem('apiKey');
+		var apiKey = localStorage.getItem(REKOLA.apiKey);
 		if(apiKey){
 			this.options.app.apiKey = apiKey;
 			this.options.app.logged = true;
@@ -39,7 +39,7 @@ var LoginView = BasePanelView.extend({
 			success: function(result) {
 				console.log('Response: ', result);
 				if(result.apiKey){
-					localStorage.setItem('apiKey', result.apiKey);
+					localStorage.setItem(REKOLA.apiKey, result.apiKey);
 					that.options.app.apiKey = result.apiKey;
 					that.options.app.logged = true;
 					that.options.app.go('index');
