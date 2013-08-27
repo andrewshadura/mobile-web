@@ -22,6 +22,7 @@ var AppController = Backbone.View.extend({
 
 	initialize: function(options) {
 		console.log('AppController init', options);
+		this.bikes = new BikeList();
 	},
 
 	renderSubview: function(view, animation) {
@@ -36,16 +37,25 @@ var AppController = Backbone.View.extend({
 	},
 	renderBikesNearby: function() {
 		var that = this;
-		var bikes = new BikeList();
+		// In case of rented bike, redirect to its view
+		var rented = localStorage.getItem(REKOLA.rentedBike);
+		if(rented){
+			rented = JSON.parse(rented);
+			this.bikes.add(rented);
+			this.go('bike/' + rented.id + '/rented');
+			return;
+		}
+		// View instance
 		var view = new BikesNearbyView({
 			app: this,
-			model: bikes
+			model: this.bikes
 		});
 		this.renderSubview(view);
-
+		// Locate user to get nearby bikes from API
 		this.geolocate(function(pos) {
 			$.ui.showMask('Načítám kola poblíž...');
-			bikes.fetch({
+			// Trigger Collection.fetch with changed AJAX options to match API specs
+			that.bikes.fetch({
 				data: {
 					latitude: pos.lat,
 					longitude: pos.lng
@@ -63,8 +73,6 @@ var AppController = Backbone.View.extend({
 				}
 			});
 		});
-
-		this.bikes = bikes;
 	},
 	renderBikeDetail: function(id) {
 		var bike = this.bikes.get(id);
