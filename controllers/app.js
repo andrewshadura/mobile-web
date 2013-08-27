@@ -15,6 +15,7 @@ var AppController = Backbone.View.extend({
 	el: $('#content'),
 
 	logged: false,
+	apiKey: '',
 	userPosition: false,
 
 	initialize: function(options) {
@@ -32,6 +33,7 @@ var AppController = Backbone.View.extend({
 		this.renderSubview(view, 'none');
 	},
 	renderBikesNearby: function() {
+		var that = this;
 		var bikes = new BikeList();
 		var view = new BikesNearbyView({
 			app: this,
@@ -44,6 +46,9 @@ var AppController = Backbone.View.extend({
 				data: {
 					latitude: pos.lat,
 					longitude: pos.lng
+				},
+				headers: {
+					'X-Api-Key': that.apiKey
 				},
 				success: function() {
 					view.render();
@@ -131,6 +136,7 @@ var AppController = Backbone.View.extend({
 			case 'error':
 				console.log('AJAX error', xhr);
 				if(xhr.status == 401){
+					this.logged = false;
 					this.go('login'); // Redirec the to the login page.
 				} else if(xhr.status == 403){
 					this.go('denied'); // 403 -- Access denied

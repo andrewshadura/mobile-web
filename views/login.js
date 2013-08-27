@@ -15,6 +15,7 @@ var LoginView = BasePanelView.extend({
 	initialize: function() {
 		var apiKey = localStorage.getItem('apiKey');
 		if(apiKey){
+			this.options.app.apiKey = apiKey;
 			this.options.app.logged = true;
 			this.options.app.go('index');
 		}
@@ -39,6 +40,7 @@ var LoginView = BasePanelView.extend({
 				console.log('Response: ', result);
 				if(result.apiKey){
 					localStorage.setItem('apiKey', result.apiKey);
+					that.options.app.apiKey = result.apiKey;
 					that.options.app.logged = true;
 					that.options.app.go('index');
 				} else {
