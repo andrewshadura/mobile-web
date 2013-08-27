@@ -42,6 +42,7 @@ var AppController = Backbone.View.extend({
 		this.renderSubview(view);
 
 		this.geolocate(function(pos) {
+			$.ui.showMask('Načítám kola poblíž...');
 			bikes.fetch({
 				data: {
 					latitude: pos.lat,
@@ -52,9 +53,11 @@ var AppController = Backbone.View.extend({
 				},
 				success: function() {
 					view.render();
+					$.ui.hideMask();
 				},
 				error: function(model, xhr) {
 					that.ajaxError(xhr, 'error');
+					$.ui.hideMask();
 				}
 			});
 		});
