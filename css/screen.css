@@ -75,3 +75,16 @@ svg {
   float: right;
   padding-right: 10px;
 }
+
+#bikeDetail .map {
+  margin: -10px;
+  margin-bottom: 0;
+  height: 50%;
+}
+#bikeDetail .position {
+  margin: 20px 0;
+  text-align: center;
+}
+#bikeDetail .position .distance {
+  font-weight: bold;
+}
