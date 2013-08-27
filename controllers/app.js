@@ -129,12 +129,32 @@ var AppController = Backbone.View.extend({
 		document.location.hash = where;
 	},
 
+	ajax: function(options) {
+		var that = this;
+		var defaults = {
+			type: 'GET',
+			contentType: 'application/json',
+			dataType: 'json',
+			headers: { 'X-Api-Key': this.apiKey	},
+			error: function(xhr) {
+				that.ajaxError(xhr, 'error');
+			}
+		}
+		_.defaults(options, defaults);
+		$.ajax(options);
+	},
+
 	/**
 	 * Handle AJAX errors for authentication and other errors
 	 * @param  {XMLHttpRequest} xhr  [description]
 	 * @param  {String} type [description]
 	 */
 	ajaxError: function(xhr, type) {
+		if(xhr.response.message){
+			alert(xhr.response.message);
+			return;
+		}
+
 		switch (type){
 			case 'parsererror':
 				console.error('AJAX parse error', xhr);
