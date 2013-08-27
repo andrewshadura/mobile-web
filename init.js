@@ -5,6 +5,7 @@ $.ui.loadDefaultHash = false;
 $.ui.backButtonText = "Zpět";
 $.ui.showBackButton = false;
 $.ui.showNavMenu = false;
+$.ui.useOSThemes = false;
 
 window.onload = function() {
 	$.ui.launch();
