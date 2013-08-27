@@ -32,10 +32,10 @@ var LoginView = BasePanelView.extend({
 			url: REKOLA.remoteUrl + '/accounts/mine/login',
 			contentType: 'application/json',
 			dataType: 'json',
-			data: {
+			data: JSON.stringify({
 				'username': username,
 				'password': password
-			},
+			}),
 			success: function(result) {
 				console.log('Response: ', result);
 				if(result.apiKey){
