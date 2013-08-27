@@ -100,7 +100,14 @@
 		</script>
 
 		<script type="text/template" id="template-bikedetail">
-			<%- JSON.stringify(bike) %>
+			<div class="map"></div>
+			<div class="position">
+				<span class="distance"><%- bike.distance %></span>,
+				<span class="address"><%- bike.address %></span>
+			</div>
+			<p class="note">
+				<%- JSON.stringify(bike) %>
+			</p>
 		</script>
 
 		<script type="text/javascript" charset="utf-8" src="init.js"></script>
