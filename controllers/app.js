@@ -11,6 +11,7 @@ var BikesNearbyView = require('views/bikesNearby');
 var BikeDetailView = require('views/bikeDetail');
 var BikeCodeView = require('views/bikeCode');
 var BikeRentedView = require('views/bikeRented');
+var BikeReturnView = require('views/bikeReturn');
 
 /* Application controller */
 var AppController = Backbone.View.extend({
@@ -94,6 +95,14 @@ var AppController = Backbone.View.extend({
 		var bike = this.bikes.get(id);
 		console.log(bike.toJSON());
 		var view = new BikeRentedView({
+			app: this,
+			model: bike
+		});
+		this.renderSubview(view);
+	},
+	renderBikeReturn: function(id) {
+		var bike = this.bikes.get(id);
+		var view = new BikeReturnView({
 			app: this,
 			model: bike
 		});
