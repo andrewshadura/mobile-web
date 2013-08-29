@@ -105,11 +105,21 @@
 			<div class="map"></div>
 			<div class="position">
 				<span class="distance"><%- bike.distance %></span>,
-				<span class="address"><%- bike.address %></span>
+				<span class="address"><%- bike.address %></span><br>
+				<small class="note"><%- bike.note %></small>
 			</div>
 			<p class="note">
-				<%- JSON.stringify(bike) %>
+				<%- bike.description %>
 			</p>
+			<% if(bike.issues){ %>
+				<p class="issues">Závady:
+					<ul>
+					<% _.each(bike.issues, function(issue){ %>
+						<li><%- issue %></li>
+					<% }); %>
+					</ul>
+				</p>
+			<% } %>
 			<a class="button slate button-getcode">Půjčit si kolo</a>
 		</script>
 
