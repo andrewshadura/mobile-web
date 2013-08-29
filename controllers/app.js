@@ -12,6 +12,7 @@ var BikeDetailView = require('views/bikeDetail');
 var BikeCodeView = require('views/bikeCode');
 var BikeRentedView = require('views/bikeRented');
 var BikeReturnView = require('views/bikeReturn');
+var BikeReturnedView = require('views/bikeReturned');
 
 /* Application controller */
 var AppController = Backbone.View.extend({
@@ -105,6 +106,12 @@ var AppController = Backbone.View.extend({
 		var view = new BikeReturnView({
 			app: this,
 			model: bike
+		});
+		this.renderSubview(view);
+	},
+	renderBikeReturned: function() {
+		var view = new BikeReturnedView({
+			app: this
 		});
 		this.renderSubview(view);
 	},
