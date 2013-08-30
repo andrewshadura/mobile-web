@@ -19,7 +19,7 @@
 			/* REKOLA Namespace */
 			var REKOLA = {};
 			REKOLA.baseUrl = document.location.href.replace(document.location.protocol + '//' + document.location.host, '').replace(document.location.hash, '');
-			REKOLA.remoteUrl = 'http://private-eb5f-roboclevis.apiary.io';
+			REKOLA.remoteUrl = 'http://localhost/Clevis/ReKola/www/api';
 			REKOLA.apiKey = 'REKOLA-apiKey';
 			REKOLA.rentedBike = 'REKOLA-rentedBike';
 			console.log('REKOLA', REKOLA);
@@ -93,9 +93,9 @@
 			<ul class="list bikesList">
 				<% _.each(bikes, function(bike){ %>
 					<li><a class="bikeDetail" data-id="<%- bike.id %>">
-						<span class="type"><%- bike.type %></span>
-						<span class="distance"><%- bike.distance %></span>
-						<span class="address"><%- bike.address %></span>
+						<span class="type"><%- bike.name %></span>
+						<span class="distance"><%- bike.location.distance %></span>
+						<span class="address"><%- bike.location.address %></span>
 					</a></li>
 				<% }); %>
 			</ul>
@@ -104,21 +104,15 @@
 		<script type="text/template" id="template-bikedetail">
 			<div class="map"></div>
 			<div class="position">
-				<span class="distance"><%- bike.distance %></span>,
-				<span class="address"><%- bike.address %></span><br>
-				<small class="note"><%- bike.note %></small>
+				<span class="distance"><%- bike.location.distance %></span>,
+				<span class="address"><%- bike.location.address %></span><br>
+				<small class="note"><%- bike.location.note %></small>
 			</div>
 			<p class="note">
 				<%- bike.description %>
 			</p>
-			<% if(bike.issues){ %>
-				<p class="issues">Závady:
-					<ul>
-					<% _.each(bike.issues, function(issue){ %>
-						<li><%- issue %></li>
-					<% }); %>
-					</ul>
-				</p>
+			<% if(bike.issue){ %>
+				<p class="issues">Závady: <%- bike.issue %></p>
 			<% } %>
 			<a class="button slate button-getcode">Půjčit si kolo</a>
 		</script>

@@ -59,8 +59,8 @@ var AppController = Backbone.View.extend({
 			// Trigger Collection.fetch with changed AJAX options to match API specs
 			that.bikes.fetch({
 				data: {
-					latitude: pos.lat,
-					longitude: pos.lng
+					lat: pos.lat,
+					lng: pos.lng
 				},
 				headers: {
 					'X-Api-Key': that.apiKey

@@ -14,7 +14,7 @@ var BikeDetailView = BasePanelView.extend({
 
 	initialize: function(options) {
 		console.log('BikeDetailView init', options);
-		this.$el.attr('title', 'Kolo ' + this.model.get('id'));
+		this.$el.attr('title', 'Kolo: ' + this.model.get('name'));
 	},
 
 	goGetcode: function(e) {
@@ -25,7 +25,7 @@ var BikeDetailView = BasePanelView.extend({
 	initMap: function() {
 		var mapEl = this.$('.map').get(0);
 		var loc = this.model.get('location');
-		var position = new google.maps.LatLng(loc.latitude, loc.longitude);
+		var position = new google.maps.LatLng(loc.lat, loc.lng);
 
 		var gmap = new google.maps.Map(mapEl, {
 			center: position,
