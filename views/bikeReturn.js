@@ -67,9 +67,9 @@ var BikeReturnView = BasePanelView.extend({
 			data: JSON.stringify({
 				location: {
 					lat: loc.lat,
-					lng: loc.lng
-				},
-				note: note
+					lng: loc.lng,
+					note: note
+				}
 			}),
 			success: function() {
 				that.model.return(note);
