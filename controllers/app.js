@@ -206,7 +206,10 @@ var AppController = Backbone.View.extend({
 			case 'error':
 				console.error('AJAX error', xhr);
 				if(xhr.status == 401){
+					// Clear login local session
+					this.apiKey = false;
 					this.logged = false;
+					localStorage.removeItem(REKOLA.apiKey);
 					this.go('login'); // Redirec the to the login page.
 				} else if(xhr.status == 403){
 					this.go('denied'); // 403 -- Access denied
