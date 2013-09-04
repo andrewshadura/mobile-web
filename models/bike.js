@@ -7,10 +7,18 @@ var Bike = Backbone.Model.extend({
 	defaults: function() {
 		return {
 			/*id: 0,*/
-			position: { lat: null, lng: null},
-			address: 'Ulice, č.p., Město',
-			positionNote: '',
-			type: 'old',
+			description: '',
+			issue: '',
+			location: {
+				address: 'Mars',
+				distance: null,
+				lat: null,
+				lng: null,
+				note: '',
+				type: ''
+			},
+			status: '',
+
 			rented: false,
 		};
 	},
