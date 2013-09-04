@@ -164,7 +164,7 @@ var AppController = Backbone.View.extend({
 			console.error('Browser doesn\'t support geolocation.');
 			error();
 		} else {
-			navigator.geolocation.getCurrentPosition(success, error);
+			navigator.geolocation.getCurrentPosition(success, error, {enableHighAccuracy: true, timeout: 15000, maximumAge: 600000});
 		}
 
 	},
