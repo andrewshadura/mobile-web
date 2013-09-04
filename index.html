@@ -86,16 +86,14 @@
 		</script>
 
 		<script type="text/template" id="template-bikesnearby">
-			<% if(position) { %>
-				<p class="position">Pozice: <%- position %></p>
-			<% } %>
-
 			<ul class="list bikesList">
 				<% _.each(bikes, function(bike){ %>
 					<li><a class="bikeDetail" data-id="<%- bike.id %>">
-						<span class="type"><%- bike.name %></span>
 						<span class="distance"><%- bike.location.distance %></span>
-						<span class="address"><%- bike.location.address %></span>
+						<span class="right">
+							<span class="name"><%- bike.name %></span>
+							<span class="address"><%- bike.location.address %></span>
+						</span>
 					</a></li>
 				<% }); %>
 			</ul>
@@ -140,7 +138,7 @@
 				<img class="mapIcon" src="img/ico-direction_down-simple.png">
 				<div class="map"></div>
 			</div>
-			<textarea placeholder="Upřesněte prosím, kde kolo stojí (např. 3. lamba od ulice X)"></textarea>
+			<textarea placeholder="Upřesněte prosím, kde kolo stojí (např. 3. lampa od ulice X)"></textarea>
 			<a class="button slate button-return">Kolo vráceno a uzamčeno</a>
 		</script>
 

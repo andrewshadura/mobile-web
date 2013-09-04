@@ -66,6 +66,10 @@ svg {
   top: 40px;
 }
 
+.bikesList {
+  margin-top: -10px !important;
+  margin-bottom: -10px !important;
+}
 .bikesList a:active, .bikesList a:focus {
   background-color: lightyellow;
 }
@@ -75,9 +79,15 @@ svg {
 .bikesList .distance {
   font-weight: bold;
 }
-.bikesList .address {
+.bikesList .right {
   float: right;
   padding-right: 10px;
+  text-align: right;
+  margin-top: -0.6em;
+}
+.bikesList .name {
+  display: block;
+  font-weight: bold;
 }
 
 #bikeDetail .map {
