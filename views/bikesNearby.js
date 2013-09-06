@@ -2,7 +2,7 @@ var BasePanelView = require('views/basePanel');
 
 var BikesNearbyView = BasePanelView.extend({
 	attributes: {
-		title: 'Kola okolo'
+		'data-title': 'Kola okolo'
 	},
 	id: 'bikesNearby',
 

@@ -2,7 +2,7 @@ var BasePanelView = require('views/basePanel');
 
 var BikeCodeView = BasePanelView.extend({
 	attributes: {
-		title: 'Kód kola'
+		'data-title': 'Kód kola'
 	},
 	id: 'bikeCode',
 

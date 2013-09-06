@@ -2,7 +2,7 @@ var BasePanelView = require('views/basePanel');
 
 var BikeDetailView = BasePanelView.extend({
 	attributes: {
-		title: 'Kolo'
+		'data-title': 'Kolo'
 	},
 	id: 'bikeDetail',
 
@@ -14,7 +14,7 @@ var BikeDetailView = BasePanelView.extend({
 
 	initialize: function(options) {
 		console.log('BikeDetailView init', options);
-		this.$el.attr('title', 'Kolo: ' + this.model.get('name'));
+		this.$el.data('title', this.model.get('name'));
 	},
 
 	goGetcode: function(e) {

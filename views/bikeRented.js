@@ -2,7 +2,7 @@ var BasePanelView = require('views/basePanel');
 
 var BikeRentedView = BasePanelView.extend({
 	attributes: {
-		title: 'Tak jedem!'
+		'data-title': 'Tak jedem!'
 	},
 	id: 'bikeRented',
 
