@@ -2,7 +2,6 @@
   "name": "intel-appframework",
   "homepage": "http://app-framework-software.intel.com/",
   "description": "The definitive HTML5 mobile javascript framework",
-  "version": "2.0.0",
   "keywords": [
     "mobile",
     "app",
@@ -25,13 +24,13 @@
     "test",
     "tests"
   ],
-  "_release": "2.0.0",
+  "_release": "master",
   "_resolution": {
-    "type": "version",
-    "tag": "2.0.0",
-    "commit": "722d0628d70ed75c70196fec06304173ec77845c"
+    "type": "branch",
+    "branch": "master",
+    "commit": "39c38dd4cc164cb373b5e0a2144dd81508858c93"
   },
   "_source": "git://github.com/01org/appframework.git",
-  "_target": "~2.0.0",
-  "_direct": true
+  "_target": "master",
+  "_originalSource": "intel-appframework"
 }

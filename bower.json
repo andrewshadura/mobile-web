@@ -10,7 +10,7 @@
     "tests"
   ],
   "dependencies": {
-    "intel-appframework": "~2.0.0",
+    "intel-appframework": "master",
     "backbone": "~1.0.0",
     "underscore": "~1.5.1"
   }

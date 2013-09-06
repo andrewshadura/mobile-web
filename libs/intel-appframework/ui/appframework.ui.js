@@ -321,7 +321,7 @@
     };
 })(af);
 /**
- * af.scroller 
+ * af.scroller
  * created by appMobi with modifications by Carlos Ouro @ Badoo and Intel
  * Supports iOS native touch scrolling
  * Optimizations and bug improvements by Intel
@@ -699,12 +699,12 @@
 
         };
         nativeScroller = function (el, opts) {
-           
+
             if(opts.nativeParent){
                 el=el.parentNode;
             }
             this.init(el, opts);
-            
+
             var $el = $(el);
 
             if (opts.noParent !== true) {
@@ -782,13 +782,13 @@
             }
         };
         nativeScroller.prototype.onTouchStart = function (e) {
-            
+
 
             if(this.el.scrollTop===0)
                 this.el.scrollTop=1;
             if(this.el.scrollTop===(this.el.scrollHeight - this.el.clientHeight))
                 this.el.scrollTop-=1;
-            
+
             if(this.horizontalScroll){
                 if(this.el.scrollLeft===0)
                     this.el.scrollLeft=1;
@@ -807,10 +807,10 @@
 
                 }
             }
-           
+
         };
         nativeScroller.prototype.onTouchMove = function (e) {
-           
+
             var newcY = e.touches[0].pageY - this.dY;
             var newcX = e.touches[0].pageX - this.dX;
             if(this.hasVertScroll&&this.el.clientHeight==this.el.scrollHeight){
@@ -1214,7 +1214,7 @@
             this.hasMoved = false;
 
             this.scrollerMoveCSS(this.lastScrollInfo, 0);
-      
+
 
         };
         jsScroller.prototype.getCSSMatrix = function (el) {
@@ -1409,7 +1409,7 @@
 
         };
 
-       
+
 
         jsScroller.prototype.calculateMovement = function (event, last) {
             //default variables
@@ -1463,7 +1463,7 @@
 
             var minLeft=this.container.clientWidth/2;
             var maxLeft=this.elementInfo.maxLeft+minLeft;
-            
+
             if (scrollInfo.x > minLeft) scrollInfo.x = minLeft;
             else if (-scrollInfo.x > maxLeft) scrollInfo.x = -maxLeft;
             else return;
@@ -2115,7 +2115,7 @@
 
             if (what == 1) { //show
                 $(theEl).vendorCss("TextSecurity","none");
-                
+
             } else {
                 $(theEl).vendorCss("TextSecurity","disc");
             }
@@ -3206,7 +3206,7 @@
 
 
 
-        if ("AppMobi" in window){ 
+        if ("AppMobi" in window){
             document.addEventListener("appMobi.device.ready", function() {
                 that.autoBoot();
             });
@@ -4553,7 +4553,7 @@
             var that = this;
             if (target.indexOf("http") == -1) target = AppMobi.webRoot + target;
             var xmlhttp = new XMLHttpRequest();
-        
+
             if (anchor && typeof(anchor) !== "object") {
                 anchor = document.createElement("a");
                 anchor.setAttribute("data-persist-ajax", true);
