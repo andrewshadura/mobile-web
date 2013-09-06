@@ -121,3 +121,12 @@ svg {
   position: relative;
   z-index: 10;
 }
+
+#bikeRented .info {
+  text-align: center;
+}
+#bikeRented .info strong {
+  display: block;
+  margin: 20px 0;
+  font-size: 200%;
+}
