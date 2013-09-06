@@ -6,7 +6,7 @@ var BikeList = Backbone.Collection.extend({
 
 	parse: function(response) {
 		console.log('parse:', response);
-		return response.bikes;
+		return response;
 	}
 });
 
