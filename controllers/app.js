@@ -67,6 +67,7 @@ var AppController = Backbone.View.extend({
 				},
 				success: function() {
 					view.render();
+					var iscroll = new IScroll('#' + view.id);
 					$.ui.hideMask();
 				},
 				error: function(model, xhr) {
