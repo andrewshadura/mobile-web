@@ -9,7 +9,8 @@ var BikeCodeView = BasePanelView.extend({
 	template: _.template($('#template-bikecode').html()),
 
 	events: {
-		'click .button-getcode': 'getCode'
+		'click .button-getcode': 'getCode',
+		'submit form': 'getCode'
 	},
 
 	initialize: function(options) {

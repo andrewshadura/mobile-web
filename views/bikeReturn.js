@@ -9,7 +9,8 @@ var BikeReturnView = BasePanelView.extend({
 	template: _.template($('#template-bikereturn').html()),
 
 	events: {
-		'click .button-return': 'doReturn'
+		'click .button-return': 'doReturn',
+		'submit form': 'doReturn'
 	},
 
 	initialize: function(options) {

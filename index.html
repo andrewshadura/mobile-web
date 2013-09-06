@@ -77,8 +77,11 @@
 
 		<!-- Templates -->
 		<script type="text/template" id="template-login">
-			<input class="username" type="text" placeholder="Jméno">
-			<input class="password" type="password" placeholder="Heslo">
+			<form action>
+				<input class="username" type="text" placeholder="Jméno">
+				<input class="password" type="password" placeholder="Heslo">
+				<input class="accessible" type="submit">
+			</form>
 			<a class="button slate button-login">Přihlásit se</a>
 
 			<p>
@@ -118,7 +121,10 @@
 		</script>
 
 		<script type="text/template" id="template-bikecode">
-			<input type="text" class="code" placeholder="identifikátor kola">
+			<form action>
+				<input type="text" class="code" placeholder="identifikátor kola">
+				<input class="accessible" type="submit">
+			</form>
 			<a class="button slate button-getcode">Získat kód zámku</a>
 			<p>Opište identifikátor z tabulky na kole a získáte kód zámku.</p>
 			<p>Od té chvíle máte kolo půjčené.</p>
@@ -140,7 +146,10 @@
 				<img class="mapIcon" src="img/ico-direction_down-simple.png">
 				<div class="map"></div>
 			</div>
-			<textarea placeholder="Upřesněte prosím, kde kolo stojí (např. 3. lampa od ulice X)"></textarea>
+			<form action>
+				<textarea placeholder="Upřesněte prosím, kde kolo stojí (např. 3. lampa od ulice X)"></textarea>
+				<input class="accessible" type="submit">
+			</form>
 			<a class="button slate button-return">Kolo vráceno a uzamčeno</a>
 		</script>
 

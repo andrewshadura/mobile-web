@@ -9,7 +9,8 @@ var LoginView = BasePanelView.extend({
 	template: _.template($('#template-login').html()),
 
 	events: {
-		'click .button-login': 'doLogin'
+		'click .button-login': 'doLogin',
+		'submit form': 'doLogin'
 	},
 
 	initialize: function() {
