@@ -25,27 +25,16 @@
 			REKOLA.apiKey = 'REKOLA-apiKey';
 			REKOLA.rentedBike = 'REKOLA-rentedBike';
 			console.log('REKOLA', REKOLA);
-
-			/* include touch on desktop browsers only */
-			if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
-				var script = document.createElement("script");
-				script.src = "libs/intel-appframework/plugins/af.desktopBrowsers.js";
-				var tag = $("head").append(script);
-				// $.os.android = true; //let's make it run like an android device
-				// $.os.ios = true;
-				$.os.desktop = true;
-			}
 		</script>
-
-
 	</head>
 
 	<body>
-		<div id="afui"> <!-- this is the main container div.  This way, you can have only part of your app use UI -->
-			<!-- this is the header div at the top -->
+		<div id="afui">
+
 			<div id="header">
 				<h1 id="pageTitle">ReKola</h1>
 			</div>
+
 			<div id="content">
 
 				<div id="splashscreen">
@@ -54,23 +43,6 @@
 						<p>Rozjíždím aplikaci...</p>
 					</div>
 				</div>
-
-				<!--
-
-				<div title="Kolo 234" id="bike" class="panel">
-					mapa<br>
-					adresa<br>
-					popis<br>
-
-					<a class="button slate">Jdu si pro kolo</a>
-				</div>
-
-				<div title="O projektu ReKola" id="aboutApp" class="panel">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, debitis impedit dicta soluta libero rerum nisi deserunt optio vero natus. Dolore, eaque id doloribus saepe quam animi optio corporis et!</p>
-				</div>
-				<div title="Jak se přihlásit" id="howtoLogin" class="panel">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, dolore, ea sint et ut rerum unde. Illo, voluptate, molestiae reprehenderit vero quisquam ipsa quis assumenda vel asperiores. Adipisci, voluptatem, explicabo.</p>
-				</div> -->
 
 			</div>
 		</div>
