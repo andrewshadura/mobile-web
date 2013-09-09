@@ -1,5 +1,3 @@
-var Bike = require('models/bike');
-
 var BikeList = Backbone.Collection.extend({
 	model: Bike,
 	url: REKOLA.remoteUrl + '/bikes',
@@ -9,5 +7,3 @@ var BikeList = Backbone.Collection.extend({
 		return response;
 	}
 });
-
-exports = BikeList;

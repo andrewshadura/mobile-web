@@ -1,5 +1,3 @@
-var BasePanelView = require('views/basePanel');
-
 var BikesNearbyView = BasePanelView.extend({
 	attributes: {
 		'data-title': 'Kola okolo'
@@ -33,5 +31,3 @@ var BikesNearbyView = BasePanelView.extend({
 	}
 
 });
-
-exports = BikesNearbyView;

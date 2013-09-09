@@ -1,19 +1,3 @@
-/* Models */
-var Bike = require('models/bike');
-
-/* Collections */
-var BikeList = require('models/bikeList');
-
-/* Views */
-var BasePanelView = require('views/basePanel');
-var LoginView = require('views/login');
-var BikesNearbyView = require('views/bikesNearby');
-var BikeDetailView = require('views/bikeDetail');
-var BikeCodeView = require('views/bikeCode');
-var BikeRentedView = require('views/bikeRented');
-var BikeReturnView = require('views/bikeReturn');
-var BikeReturnedView = require('views/bikeReturned');
-
 /* Application controller */
 var AppController = Backbone.View.extend({
 	el: $('#content'),
@@ -223,5 +207,3 @@ var AppController = Backbone.View.extend({
 	}
 
 });
-
-exports = AppController;

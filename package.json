@@ -1,0 +1,20 @@
+{
+  "name": "ReKola-app",
+  "version": "0.0.0",
+  "main": "index.html",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-compass": "~0.5.0",
+    "grunt-contrib-uglify": "~0.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Clevis/ReKola.git"
+  },
+  "author": "Clevis s.r.o. | Matej Simek",
+  "readmeFilename": "readme.md",
+  "bugs": {
+    "url": "https://github.com/Clevis/ReKola/issues"
+  }
+}

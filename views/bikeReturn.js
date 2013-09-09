@@ -1,5 +1,3 @@
-var BasePanelView = require('views/basePanel');
-
 var BikeReturnView = BasePanelView.extend({
 	attributes: {
 		'data-title': 'Vrátit kolo'
@@ -94,5 +92,3 @@ var BikeReturnView = BasePanelView.extend({
 	}
 
 });
-
-exports = BikeReturnView;

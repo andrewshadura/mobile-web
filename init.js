@@ -12,9 +12,6 @@ window.onload = function() {
 };
 
 /* REKOLA App initialization */
-var AppRouter = require('router');
-var AppController = require('controllers/app');
-
 $.ui.ready(function () {
 	$.ui.removeFooterMenu();
 

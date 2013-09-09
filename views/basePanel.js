@@ -10,5 +10,3 @@ var BasePanelView = Backbone.View.extend({
 		return this;
 	}
 });
-
-exports = BasePanelView;

@@ -1,5 +1,3 @@
-var BasePanelView = require('views/basePanel');
-
 var BikeReturnedView = BasePanelView.extend({
 	attributes: {
 		'data-title': 'Úspěšně vráceo'
@@ -26,5 +24,3 @@ var BikeReturnedView = BasePanelView.extend({
 		return this;
 	},
 });
-
-exports = BikeReturnedView;

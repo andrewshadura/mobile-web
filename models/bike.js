@@ -41,5 +41,3 @@ var Bike = Backbone.Model.extend({
 	},
 
 });
-
-exports = Bike;

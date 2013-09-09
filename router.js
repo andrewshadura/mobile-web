@@ -72,5 +72,3 @@ var AppRouter = Backbone.Router.extend({
 	},
 
 });
-
-exports = AppRouter;

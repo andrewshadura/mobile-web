@@ -1,5 +1,3 @@
-var BasePanelView = require('views/basePanel');
-
 var BikeDetailView = BasePanelView.extend({
 	attributes: {
 		'data-title': 'Kolo'
@@ -56,5 +54,3 @@ var BikeDetailView = BasePanelView.extend({
 		return this;
 	},
 });
-
-exports = BikeDetailView;

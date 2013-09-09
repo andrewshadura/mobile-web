@@ -1,5 +1,3 @@
-var BasePanelView = require('views/basePanel');
-
 var BikeRentedView = BasePanelView.extend({
 	attributes: {
 		'data-title': 'Tak jedem!'
@@ -29,5 +27,3 @@ var BikeRentedView = BasePanelView.extend({
 		return this;
 	},
 });
-
-exports = BikeRentedView;

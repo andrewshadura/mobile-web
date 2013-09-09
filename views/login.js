@@ -1,5 +1,3 @@
-var BasePanelView = require('views/basePanel');
-
 var LoginView = BasePanelView.extend({
 	attributes: {
 		title: 'ReKola - přihlášení'
@@ -60,5 +58,3 @@ var LoginView = BasePanelView.extend({
 	}
 
 });
-
-exports = LoginView;
