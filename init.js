@@ -7,6 +7,8 @@ $.ui.showBackButton = false;
 $.ui.showNavMenu = false;
 $.ui.useOSThemes = false;
 
+$('#afui').removeAttr('class'); // Force not using of OS themes
+
 window.onload = function() {
 	$.ui.launch();
 };
