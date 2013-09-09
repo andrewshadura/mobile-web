@@ -8,4 +8,4 @@ cd /www/rekola-client
 git fetch
 git reset origin/app --hard
 npm install
-grunt
+grunt --no-color
