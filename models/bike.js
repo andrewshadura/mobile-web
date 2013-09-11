@@ -32,7 +32,7 @@ var Bike = Backbone.Model.extend({
 		localStorage.setItem(REKOLA.rentedBike, JSON.stringify(this.toJSON()));
 	},
 
-	return: function(note) {
+	returnBack: function(note) {
 		this.set({
 			note: note,
 			rented: false

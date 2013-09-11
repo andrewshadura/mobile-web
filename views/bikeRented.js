@@ -15,7 +15,6 @@ var BikeRentedView = BasePanelView.extend({
 	},
 
 	returnBike: function() {
-		// this.model.return(prompt('Zadejte adresu, kde jste kolo nechali'), prompt('Teď zadejte bližší popis místa'));
 		this.options.app.go('bike/' + this.model.get('id') + '/return');
 	},
 

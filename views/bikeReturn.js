@@ -71,7 +71,7 @@ var BikeReturnView = BasePanelView.extend({
 				}
 			}),
 			success: function() {
-				that.model.return(note);
+				that.model.returnBike(note);
 				console.log('Returned bike:', that.model.toJSON());
 				that.options.app.go('/bike/' + id + '/returned');
 			},
