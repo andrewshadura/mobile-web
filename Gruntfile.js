@@ -40,14 +40,26 @@ module.exports = function(grunt) {
 					]
 				}
 			}
+		},
+
+		watch: {
+			compass: {
+				files: 'sass/**/*.sass',
+				tasks: ['compass:dist']
+			},
+			js: {
+				files: ['*.js', 'controllers/*.js', 'models/*.js', 'views/*.js'],
+				tasks: ['uglify:dist']
+			}
 		}
 	});
 
 	// Load the plugin that provides the "uglify" task.
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Default task(s).
-	grunt.registerTask('default', ['compass', 'uglify']);
+	grunt.registerTask('default', ['compass:dist', 'uglify:dist']);
 
 };
