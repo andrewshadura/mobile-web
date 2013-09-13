@@ -45,7 +45,7 @@ var AppRouter = Backbone.Router.extend({
 		console.log('router: return', id);
 		this.options.app.renderBikeReturn(id);
 	},
-	returned: function() {
+	returned: function(id) {
 		console.log('router: returned', id);
 		this.options.app.renderBikeReturned();
 	},
