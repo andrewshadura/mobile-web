@@ -1,7 +1,4 @@
 var BikeCodeView = BasePanelView.extend({
-	attributes: {
-		'data-title': 'Kód kola'
-	},
 	id: 'bikeCode',
 
 	template: _.template($('#template-bikecode').html()),

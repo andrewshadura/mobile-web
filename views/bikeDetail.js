@@ -1,7 +1,4 @@
 var BikeDetailView = BasePanelView.extend({
-	attributes: {
-		'data-title': 'Kolo'
-	},
 	id: 'bikeDetail',
 
 	template: _.template($('#template-bikedetail').html()),

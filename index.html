@@ -41,6 +41,9 @@
 
 		<!-- Templates -->
 		<script type="text/template" id="template-login">
+			<header>
+				<h1>ReKola - přihlášení</h1>
+			</header>
 			<form action>
 				<input class="username" type="text" placeholder="Jméno">
 				<input class="password" type="password" placeholder="Heslo">
@@ -55,6 +58,11 @@
 		</script>
 
 		<script type="text/template" id="template-bikesnearby">
+			<header>
+				<a class="button fright button-rent">Půjčit si kolo</a>
+				<!--<a class="button fleft button-myaccount">Můj účet</a>-->
+				<h1>Kola okolo</h1>
+			</header>
 			<ul class="list bikesList">
 				<% _.each(bikes, function(bike){ %>
 					<li><a class="bikeDetail" data-id="<%- bike.id %>">
@@ -69,6 +77,11 @@
 		</script>
 
 		<script type="text/template" id="template-bikedetail">
+			<header>
+				<a class="button fright button-rent">Půjčit si kolo</a>
+				<a class="button fleft button-back">Kola okolo</a>
+				<h1><%- bike.name %></h1>
+			</header>
 			<div class="map"></div>
 			<div class="position">
 				<span class="distance"><%- bike.location.distance %></span>,
@@ -85,6 +98,10 @@
 		</script>
 
 		<script type="text/template" id="template-bikecode">
+			<header>
+				<a class="button fleft button-back">Kola okolo</a>
+				<h1>Půjčit si kolo</h1>
+			</header>
 			<form action>
 				<input type="text" class="code" placeholder="identifikátor kola">
 				<input class="accessible" type="submit">
@@ -96,6 +113,9 @@
 		</script>
 
 		<script type="text/template" id="template-bikerented">
+			<header>
+				<h1>Tak jedem!</h1>
+			</header>
 			<div class="info">
 				<p>Kód zámku</p>
 				<strong><%- bike.unlockCode %></strong>
@@ -106,6 +126,10 @@
 		</script>
 
 		<script type="text/template" id="template-bikereturn">
+			<header>
+				<a class="button fleft button-back">Jedu dál</a>
+				<h1>Vrátit kolo</h1>
+			</header>
 			<p class="address"></p>
 			<small class="specify">Neodpovídá adresa? Upravte ji přetažením mapy:</small>
 			<div class="mapWrap">
@@ -120,6 +144,9 @@
 		</script>
 
 		<script type="text/template" id="template-bikereturned">
+			<header>
+				<h1>Úspěšně vráceno</h1>
+			</header>
 			<p>Kolo bylo vráceno</p>
 			<p>Těšíme se, že se brzy zase svezete.</p>
 			<a class="button slate button-nearby">Seznam kol v okolí</a>

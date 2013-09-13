@@ -1,7 +1,4 @@
 var LoginView = BasePanelView.extend({
-	attributes: {
-		title: 'ReKola - přihlášení'
-	},
 	id: 'login',
 
 	template: _.template($('#template-login').html()),

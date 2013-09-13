@@ -1,7 +1,4 @@
 var BikesNearbyView = BasePanelView.extend({
-	attributes: {
-		'data-title': 'Kola okolo'
-	},
 	id: 'bikesNearby',
 
 	template: _.template($('#template-bikesnearby').html()),

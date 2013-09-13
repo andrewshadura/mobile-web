@@ -1,7 +1,4 @@
 var BikeReturnedView = BasePanelView.extend({
-	attributes: {
-		'data-title': 'Úspěšně vráceo'
-	},
 	id: 'bikeReturned',
 
 	template: _.template($('#template-bikereturned').html()),
