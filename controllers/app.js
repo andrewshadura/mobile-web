@@ -1,19 +1,27 @@
 /* Application controller */
 var AppController = Backbone.View.extend({
-	el: $('#content'),
+	el: $('#afui'),
 
 	logged: false,
 	apiKey: '',
 	userPosition: false,
 
+	events: {
+		'click .button-go': function(e) {
+			e.preventDefault();
+			this.go($(e.currentTarget).data('go'));
+		}
+	},
+
 	initialize: function(options) {
 		console.log('AppController init', options);
 		this.bikes = new BikeList();
+		this.$content = this.$('#content');
 	},
 
 	renderSubview: function(view, animation) {
 		this.$('#'+view.id).remove(); // remove old element
-		this.$el.append(view.render().el); // place a new one
+		this.$content.append(view.render().el); // place a new one
 		$.ui.loadContent('#'+view.id, true, false, animation ? animation : 'slide'); // navigate UI to this panel
 	},
 

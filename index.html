@@ -54,8 +54,8 @@
 
 		<script type="text/template" id="template-bikesnearby">
 			<header>
-				<a class="button fright button-rent">Půjčit si kolo</a>
-				<!--<a class="button fleft button-myaccount">Můj účet</a>-->
+				<!--<a class="button fright button-go" data-go="bike/null/getcode">Půjčit si kolo</a>-->
+				<!--<a class="button fleft button-go" data-go="account">Můj účet</a>-->
 				<h1>Kola okolo</h1>
 			</header>
 			<ul class="list bikesList">
@@ -73,8 +73,8 @@
 
 		<script type="text/template" id="template-bikedetail">
 			<header>
-				<a class="button fright button-rent">Půjčit si kolo</a>
-				<a class="button fleft button-back">Kola okolo</a>
+				<a class="button fright button-go" data-go="bike/<%- bike.id %>/getcode">Půjčit si kolo</a>
+				<a class="button fleft button-go" data-go="nearby">Kola okolo</a>
 				<h1><%- bike.name %></h1>
 			</header>
 			<div class="map"></div>
@@ -94,7 +94,7 @@
 
 		<script type="text/template" id="template-bikecode">
 			<header>
-				<a class="button fleft button-back">Kola okolo</a>
+				<a class="button fleft button-go" data-go="nearby">Kola okolo</a>
 				<h1>Půjčit si kolo</h1>
 			</header>
 			<form action>
@@ -117,12 +117,12 @@
 				<p>Štastnou cestu!</p>
 			</div>
 			<a class="button slate button-return">Vrátit kolo</a>
-			<a class="button button-report">Nahlásit problém</a>
+			<!--<a class="button button-report">Nahlásit problém</a>-->
 		</script>
 
 		<script type="text/template" id="template-bikereturn">
 			<header>
-				<a class="button fleft button-back">Jedu dál</a>
+				<a class="button fleft button-go" data-go="bike/<%- bike.id %>/rented">Jedu dál</a>
 				<h1>Vrátit kolo</h1>
 			</header>
 			<p class="address"></p>
