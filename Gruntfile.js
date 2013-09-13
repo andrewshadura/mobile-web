@@ -1,65 +1,95 @@
 module.exports = function(grunt) {
 
+	var SASS_FILES = {
+		'build/screen.css': 'sass/screen.sass'
+	};
+
+	var JS_FILES = {
+		'build/rekola.js': [
+			// Libraries
+			'libs/intel-appframework/build/appframework.min.js',
+			'libs/intel-appframework/build/ui/appframework.ui.min.js',
+			'libs/iscroll/dist/iscroll-lite-min.js',
+			'libs/underscore/underscore-min.js',
+			'libs/backbone/backbone-min.js',
+			// Models
+			'models/*.js',
+			// Views
+			'views/*.js',
+			// Controllers
+			'controllers/*.js',
+			// Inits
+			'router.js',
+			'init.js'
+		]
+	};
+
 	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
-		compass: {
+		sass: {
+
+			dev: {
+				options: {
+					sourcemap: true
+				},
+				files: SASS_FILES
+			},
+
 			dist: {
 				options: {
-					sassDir: 'sass',
-					cssDir: 'build',
-					environment: 'production',
-					outputStyle: 'compressed'
-				}
+					style: 'compressed',
+					noCache: true
+				},
+				files: SASS_FILES
 			}
+
 		},
 
 		uglify: {
+
+			dev: {
+				options: {
+					compress: false,
+					sourceMap: 'build/rekola.source-map.js'
+				},
+				files: JS_FILES
+			},
+
 			dist: {
 				options: {
-					compress: true
+					report: 'min'
 				},
-				files: {
-					'build/rekola.js': [
-						// Libraries
-						'libs/intel-appframework/build/appframework.min.js',
-						'libs/intel-appframework/build/ui/appframework.ui.min.js',
-						'libs/iscroll/dist/iscroll-lite-min.js',
-						'libs/underscore/underscore-min.js',
-						'libs/backbone/backbone-min.js',
-						// Models
-						'models/*.js',
-						// Views
-						'views/*.js',
-						// Controllers
-						'controllers/*.js',
-						// Inits
-						'router.js',
-						'init.js'
-					]
-				}
+				files: JS_FILES
 			}
+
 		},
 
 		watch: {
-			compass: {
+
+			sass: {
 				files: 'sass/**/*.sass',
-				tasks: ['compass:dist']
+				tasks: ['sass:dev']
 			},
+
 			js: {
 				files: ['*.js', 'controllers/*.js', 'models/*.js', 'views/*.js'],
-				tasks: ['uglify:dist']
+				tasks: ['uglify:dev']
 			}
+
 		}
+
+
 	});
 
 	// Load the plugin that provides the "uglify" task.
-	grunt.loadNpmTasks('grunt-contrib-compass');
+	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Default task(s).
-	grunt.registerTask('default', ['compass:dist', 'uglify:dist']);
+	grunt.registerTask('default', ['sass:dist', 'uglify:dist']);
+	grunt.registerTask('dev', ['sass:dev', 'uglify:dev']);
 
 };
