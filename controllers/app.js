@@ -77,11 +77,9 @@ var AppController = Backbone.View.extend({
 		});
 		this.renderSubview(view);
 	},
-	renderBikeCode: function(id) {
-		var bike = this.bikes.get(id);
+	renderBikeCode: function() {
 		var view = new BikeCodeView({
-			app: this,
-			model: bike
+			app: this
 		});
 		this.renderSubview(view);
 	},
@@ -162,6 +160,15 @@ var AppController = Backbone.View.extend({
 
 	},
 
+	addBike: function(bike) {
+		var existing = this.bikes.get(bike.id);
+		if(existing){
+			this.bikes.remove(existing);
+		}
+
+		this.bikes.add(bike);
+	},
+
 	go: function(where) {
 		document.location.hash = where;
 	},
@@ -176,7 +183,7 @@ var AppController = Backbone.View.extend({
 			error: function(xhr) {
 				that.ajaxError(xhr, 'error');
 			}
-		}
+		};
 		_.defaults(options, defaults);
 		$.ajax(options);
 	},

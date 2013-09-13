@@ -54,7 +54,7 @@
 
 		<script type="text/template" id="template-bikesnearby">
 			<header>
-				<!--<a class="button fright button-go" data-go="bike/null/getcode">Půjčit si kolo</a>-->
+				<a class="button fright button-go" data-go="bike/getcode">Půjčit si kolo</a>
 				<!--<a class="button fleft button-go" data-go="account">Můj účet</a>-->
 				<h1>Kola okolo</h1>
 			</header>
@@ -73,7 +73,7 @@
 
 		<script type="text/template" id="template-bikedetail">
 			<header>
-				<a class="button fright button-go" data-go="bike/<%- bike.id %>/getcode">Půjčit si kolo</a>
+				<a class="button fright button-go" data-go="bike/getcode">Půjčit si kolo</a>
 				<a class="button fleft button-go" data-go="nearby">Kola okolo</a>
 				<h1><%- bike.name %></h1>
 			</header>
@@ -104,7 +104,6 @@
 			<a class="button slate button-getcode">Získat kód zámku</a>
 			<p>Opište identifikátor z tabulky na kole a získáte kód zámku.</p>
 			<p>Od té chvíle máte kolo půjčené.</p>
-			<a class="button button-howitworks">Jak přesně to funguje</a>
 		</script>
 
 		<script type="text/template" id="template-bikerented">

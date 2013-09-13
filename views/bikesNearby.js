@@ -23,8 +23,8 @@ var BikesNearbyView = BasePanelView.extend({
 	},
 
 	bikeDetail: function(e) {
+		e.preventDefault();
 		this.options.app.go('bike/' + $(e.currentTarget).data('id'));
-		return false;
 	}
 
 });

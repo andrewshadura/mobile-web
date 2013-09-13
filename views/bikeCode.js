@@ -10,21 +10,23 @@ var BikeCodeView = BasePanelView.extend({
 
 	initialize: function(options) {
 		console.log('BikeCodeView init', options);
+
 	},
 
 	getCode: function(e) {
 		var that = this;
-		var bikeId = this.model.get('id');
 		var bikeCode = this.$('.code').val();
 		$.ui.showMask('Získávám kód zámku...');
 
 		this.options.app.ajax({
-			url: REKOLA.remoteUrl + '/bikes/' + bikeId + '/lock-code',
+			url: REKOLA.remoteUrl + '/bikes/lock-code',
 			data: { bikeCode: bikeCode },
 
 			success: function(result) {
-				that.model.rent(bikeCode, result.lockCode);
-				that.options.app.go('bike/' + bikeId + '/rented');
+				var bike = new Bike(result.bike);
+				bike.rent(bikeCode, result.lockCode);
+				that.options.app.addBike(bike);
+				that.options.app.go('bike/' + bike.id + '/rented');
 			},
 			complete: function() {
 				$.ui.hideMask();

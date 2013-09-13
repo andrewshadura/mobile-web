@@ -9,12 +9,10 @@ var BikeDetailView = BasePanelView.extend({
 
 	initialize: function(options) {
 		console.log('BikeDetailView init', options);
-		this.$el.data('title', this.model.get('name'));
 	},
 
-	goGetcode: function(e) {
-		this.options.app.go('bike/' + this.model.get('id') + '/getcode');
-		return false;
+	goGetcode: function() {
+		this.options.app.go('bike/getcode');
 	},
 
 	initMap: function() {
