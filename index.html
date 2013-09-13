@@ -60,13 +60,13 @@
 			</header>
 			<ul class="list bikesList">
 				<% _.each(bikes, function(bike){ %>
-					<li><a class="bikeDetail" data-id="<%- bike.id %>">
+					<li class="bikeDetail" data-id="<%- bike.id %>">
 						<span class="distance"><%- bike.location.distance %></span>
 						<span class="right">
-							<span class="name"><%- bike.name %></span>
-							<span class="address"><%- bike.location.address %></span>
+							<span class="wrap"><span class="name"><%- bike.name %></span>
+								<span class="address"><%- bike.location.address %></span></span>
 						</span>
-					</a></li>
+					</li>
 				<% }); %>
 			</ul>
 		</script>

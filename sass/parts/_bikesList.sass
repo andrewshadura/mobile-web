@@ -1,20 +1,49 @@
 .bikesList
+	display: table
+	border-spacing: collapse
 	margin-top: -10px !important
 	margin-bottom: -10px !important
 
+	.bikeDetail
+		cursor: pointer
+
 	li
-	a:active, a:focus
-		background-color: lightyellow
-	.type
-		font-size: 0.7em
+		display: table-row !important
+
+	.distance, .right
+		display: table-cell
+		vertical-align: middle
+		padding: 20px 10px
+		border-bottom: 1px solid #ccc
+
 	.distance
 		font-weight: bold
+		padding-right: 0
+		white-space: nowrap
 	.right
-		float: right
-		padding-right: 10px
 		text-align: right
-		margin-top: -0.6em
+		.wrap
+			display: block
+			position: relative			
+			padding-right: 20px
+			&:after
+				position: absolute
+				right: 0
+				font-family: 'chevron'
+				speak: none
+				font-style: normal
+				font-weight: normal
+				font-variant: normal
+				text-transform: none
+				line-height: 1
+				-webkit-font-smoothing: antialiased
+				content: "\f054"
+				top: 50%
+				margin-top: -0.5em
+				color:inherit
+
 	.name
 		display: block
 		font-weight: bold
 	.address
+		color: gray
