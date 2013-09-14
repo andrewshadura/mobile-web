@@ -53,22 +53,26 @@
 		</script>
 
 		<script type="text/template" id="template-bikesnearby">
-			<header>
-				<a class="button fright button-go" data-go="bike/getcode">Půjčit si kolo</a>
-				<!--<a class="button fleft button-go" data-go="account">Můj účet</a>-->
-				<h1>Kola okolo</h1>
-			</header>
-			<ul class="list bikesList">
-				<% _.each(bikes, function(bike){ %>
-					<li class="bikeDetail" data-id="<%- bike.id %>">
-						<span class="distance"><%- bike.location.distance %></span>
-						<span class="right">
-							<span class="wrap"><span class="name"><%- bike.name %></span>
-								<span class="address"><%- bike.location.address %></span></span>
-						</span>
-					</li>
-				<% }); %>
-			</ul>
+			<div>
+				<header>
+					<a class="button fright button-go" data-go="bike/getcode">Půjčit si kolo</a>
+					<!--<a class="button fleft button-go" data-go="account">Můj účet</a>-->
+					<h1>Kola okolo</h1>
+				</header>
+				<div class="bikeList-wrap">
+					<ul class="list bikesList">
+						<% _.each(bikes, function(bike){ %>
+							<li class="bikeDetail" data-id="<%- bike.id %>">
+								<span class="distance"><%- bike.location.distance %></span>
+								<span class="right">
+									<span class="wrap"><span class="name"><%- bike.name %></span>
+										<span class="address"><%- bike.location.address %></span></span>
+								</span>
+							</li>
+						<% }); %>
+					</ul>
+				</div>
+			</div>
 		</script>
 
 		<script type="text/template" id="template-bikedetail">
