@@ -52,6 +52,8 @@ module.exports = function(grunt) {
 			dev: {
 				options: {
 					compress: false,
+					mangle: false,
+					beautify: true,
 					sourceMap: 'build/rekola.source-map.js'
 				},
 				files: JS_FILES
