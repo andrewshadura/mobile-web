@@ -106,6 +106,14 @@ var AppController = Backbone.View.extend({
 		});
 		this.renderSubview(view);
 	},
+	renderBikeReport: function(id) {
+		var bike = this.bikes.get(id);
+		var view = new BikeReportView({
+			app: this,
+			model: bike
+		});
+		this.renderSubview(view);
+	},
 
 	geolocate: function(callback) {
 		var that = this;

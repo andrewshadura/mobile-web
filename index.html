@@ -94,6 +94,7 @@
 				<p class="issues">Závady: <%- bike.issue %></p>
 			<% } %>
 			<a class="button slate button-getcode">Půjčit si kolo</a>
+			<a class="button button-go" data-go="bike/<%- bike.id %>/report">Nahlásit problém</a>
 		</script>
 
 		<script type="text/template" id="template-bikecode">
@@ -148,6 +149,33 @@
 			<p>Kolo bylo vráceno</p>
 			<p>Těšíme se, že se brzy zase svezete.</p>
 			<a class="button slate button-nearby">Seznam kol v okolí</a>
+		</script>
+
+		<script type="text/template" id="template-bikereport">
+			<header>
+				<a class="button fleft button-go" data-go="bike/<%- bike.id %>"><%- bike.name %></a>
+				<h1>Nový problém</h1>
+			</header>
+			<form action>
+				<select name="title" class="af-ui-forms">
+					<option value="Kolo tu není">Kolo tu není</option>
+					<option value="Kod zámku nefunguje">Kod zámku nefunguje</option>
+					<option value="Píchlá duše">Píchlá duše</option>
+					<option value="Problém s řetězem">Problém s řetězem</option>
+					<option value="Něco je s rámem">Něco je s rámem</option>
+					<option value="Něco chybí">Něco chybí</option>
+					<option value="Tohle mají být brzdy?">Tohle mají být brzdy?</option>
+					<option value="Bál bych se na tom jet">Bál bych se na tom jet</option>
+					<option value="JIný problém">JIný problém</option>
+				</select>
+				<div>
+					<input class="af-ui-forms" type="checkbox" name="operational" value><label for="operational">kolo je pojízdné</label>
+				</div>
+				<textarea class="af-ui-forms" name="desc" rows="4"></textarea>
+
+				<input class="accessible" type="submit">
+			</form>
+			<a class="button slate button-report">Nahlásit problém</a>
 		</script>
 
 		<script type="text/javascript" charset="utf-8" src="build/rekola.js"></script>
