@@ -7,8 +7,9 @@ var Bike = Backbone.Model.extend({
 	defaults: function() {
 		return {
 			/*id: 0,*/
+			name: '',
 			description: '',
-			issue: '',
+			issues: [],
 			location: {
 				address: 'Mars',
 				distance: null,
