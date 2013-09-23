@@ -35,7 +35,7 @@ var BikeReportView = BasePanelView.extend({
 			}),
 			success: function() {
 				alert('Problém nahlášen, děkujeme.');
-				that.options.app.go('/bike/' + id);
+				that.options.app.go('/nearby');
 			},
 			complete: function() {
 				$.ui.hideMask();
