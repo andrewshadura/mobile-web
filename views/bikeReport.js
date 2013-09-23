@@ -27,7 +27,7 @@ var BikeReportView = BasePanelView.extend({
 			data: JSON.stringify({
 				title: title,
 				description: description,
-				disabling: !!operational,
+				disabling: !operational,
 				location: {
 					lat: that.options.app.userPosition.lat,
 					lng: that.options.app.userPosition.lng
