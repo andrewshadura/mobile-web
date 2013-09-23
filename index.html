@@ -82,18 +82,28 @@
 				<a class="button fleft button-go" data-go="nearby">Kola okolo</a>
 				<h1><%- bike.name %></h1>
 			</header>
+			<% if(bike.issues.length){
+				if(bike.operational) { %>
+					<div class="hasIssues"><i class="icon bug"></i> Pojízdné s problémy</div>
+				<% } else { %>
+					<div class="notOperational"><i class="icon error"></i> Nepojízdné</div>
+			<% }} %>
 			<div class="map"></div>
 			<div class="position">
 				<span class="distance"><%- bike.location.distance %></span>,
 				<span class="address"><%- bike.location.address %></span><br>
 				<small class="note"><%- bike.location.note %></small>
 			</div>
+			<% if(bike.issues.length){ %>
+			<ul class="issues">
+				<% _.each(bike.issues, function(issue) { %>
+					<li><%- issue %></li>
+				<% }); %>
+			</ul>
+			<% } %>
 			<p class="note">
 				<%- bike.description %>
 			</p>
-			<% if(bike.issue){ %>
-				<p class="issues">Závady: <%- bike.issue %></p>
-			<% } %>
 			<a class="button slate button-getcode">Půjčit si kolo</a>
 			<a class="button button-go" data-go="bike/<%- bike.id %>/report">Nahlásit problém</a>
 		</script>

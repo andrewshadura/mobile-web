@@ -10,6 +10,7 @@ var Bike = Backbone.Model.extend({
 			name: '',
 			description: '',
 			issues: [],
+			operational: true,
 			location: {
 				address: 'Mars',
 				distance: null,
@@ -17,9 +18,8 @@ var Bike = Backbone.Model.extend({
 				lng: null,
 				note: '',
 				type: ''
-			},			
-
-			rented: false,
+			},
+			// rented: false,
 		};
 	},
 
@@ -27,7 +27,7 @@ var Bike = Backbone.Model.extend({
 		this.set({
 			bikeCode: bikeCode,
 			lockCode: unlockCode,
-			rented: true
+			// rented: true
 		});
 		localStorage.setItem(REKOLA.rentedBike, JSON.stringify(this.toJSON()));
 	},
@@ -35,7 +35,7 @@ var Bike = Backbone.Model.extend({
 	returnBack: function(note) {
 		this.set({
 			note: note,
-			rented: false
+			// rented: false
 		});
 		localStorage.removeItem(REKOLA.rentedBike);
 	},
