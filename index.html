@@ -64,7 +64,13 @@
 					<ul class="list bikesList">
 						<% _.each(bikes, function(bike){ %>
 							<li class="bikeDetail" data-id="<%- bike.id %>">
-								<span class="distance"><%- bike.location.distance %></span>
+								<span class="distance">
+									<%- bike.location.distance %>
+									<% if(bike.issues.length){
+										if(bike.operational) { %>&nbsp;<i class="icon bug"></i>
+										<% } else { %>&nbsp;<i class="icon error"></i>
+									<% }} %>
+								</span>
 								<span class="right">
 									<span class="wrap"><span class="name"><%- bike.name %></span>
 										<span class="address"><%- bike.location.address %></span></span>
