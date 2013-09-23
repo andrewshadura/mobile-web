@@ -29,8 +29,8 @@ var BikeRepairView = BasePanelView.extend({
 				description: description,
 				open: !resolved,
 				costs: {
-					material: costs,
-					time: time
+					material: parseInt(costs, 10),
+					time: parseInt(time, 10)
 				},
 				location: {
 					lat: that.options.app.userPosition.lat,
