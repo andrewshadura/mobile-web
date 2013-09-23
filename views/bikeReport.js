@@ -22,11 +22,16 @@ var BikeReportView = BasePanelView.extend({
 
 		$.ui.showMask('Nahlašuji problém...');
 		this.options.app.ajax({
+			type: 'POST',
 			url: REKOLA.remoteUrl + '/bikes/' + id + '/issues',
 			data: JSON.stringify({
 				title: title,
 				description: description,
-				disabling: operational
+				disabling: !!operational,
+				location: {
+					lat: that.options.app.userPosition.lat,
+					lng: that.options.app.userPosition.lng
+				}
 			}),
 			success: function() {
 				alert('Problém nahlášen, děkujeme.');
