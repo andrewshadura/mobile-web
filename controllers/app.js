@@ -29,16 +29,31 @@ var AppController = Backbone.View.extend({
 		var view = new LoginView({app: this});
 		this.renderSubview(view, 'none');
 	},
+
+	checkForRentedBike: function() {
+		var that = this;
+
+		this.ajax({
+			url: REKOLA.remoteUrl + '/bikes/mine',
+			success: function(result) {
+				var rented = new Bike(result);
+				that.addBike(rented);
+				localStorage.setItem(REKOLA.rentedBike, JSON.stringify(rented.toJSON()));
+				that.go('bike/' + rented.id + '/rented');
+			},
+			error: function(xhr) {
+				if(xhr.status == 404){
+					localStorage.removeItem(REKOLA.rentedBike);
+				}				
+			}
+		});
+	},
+
 	renderBikesNearby: function() {
 		var that = this;
-		// In case of rented bike, redirect to its view
-		var rented = localStorage.getItem(REKOLA.rentedBike);
-		if(rented){
-			rented = JSON.parse(rented);
-			this.bikes.add(rented);
-			this.go('bike/' + rented.id + '/rented');
-			return;
-		}
+
+		this.checkForRentedBike();
+		
 		// View instance
 		var view = new BikesNearbyView({
 			app: this,
@@ -47,26 +62,26 @@ var AppController = Backbone.View.extend({
 		this.renderSubview(view);
 		// Locate user to get nearby bikes from API
 		this.geolocate(function(pos) {
+			
 			$.ui.showMask('Načítám kola poblíž...');
-			// Trigger Collection.fetch with changed AJAX options to match API specs
-			that.bikes.fetch({
+			that.ajax({
+				url: REKOLA.remoteUrl + '/bikes',
 				data: {
 					lat: pos.lat,
 					lng: pos.lng
 				},
-				headers: {
-					'X-Api-Key': that.apiKey
-				},
-				success: function() {
+				success: function(result) {
+					_.each(result, function(bikeData) {
+						that.addBike(new Bike(bikeData));
+					});
 					view.render();
 					var iscroll = new IScroll('#' + view.id);
-					$.ui.hideMask();
 				},
-				error: function(model, xhr) {
-					that.ajaxError(xhr, 'error');
+				complete: function() {
 					$.ui.hideMask();
 				}
 			});
+			
 		});
 	},
 	renderBikeDetail: function(id) {
@@ -169,12 +184,7 @@ var AppController = Backbone.View.extend({
 	},
 
 	addBike: function(bike) {
-		var existing = this.bikes.get(bike.id);
-		if(existing){
-			this.bikes.remove(existing);
-		}
-
-		this.bikes.add(bike);
+		this.bikes.add(bike, { merge: true });
 	},
 
 	go: function(where) {

@@ -17,8 +17,7 @@ var Bike = Backbone.Model.extend({
 				lng: null,
 				note: '',
 				type: ''
-			},
-			status: '',
+			},			
 
 			rented: false,
 		};
@@ -27,7 +26,7 @@ var Bike = Backbone.Model.extend({
 	rent: function(bikeCode, unlockCode) {
 		this.set({
 			bikeCode: bikeCode,
-			unlockCode: unlockCode,
+			lockCode: unlockCode,
 			rented: true
 		});
 		localStorage.setItem(REKOLA.rentedBike, JSON.stringify(this.toJSON()));

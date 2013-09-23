@@ -102,13 +102,14 @@
 				<a class="button fleft button-go" data-go="nearby">Kola okolo</a>
 				<h1>Půjčit si kolo</h1>
 			</header>
+			<p>Opište identifikátor z tabulky na kole a získáte kód zámku.</p>
+			<p>Od té chvíle máte kolo půjčené.</p>
 			<form action>
 				<input type="text" class="code" placeholder="identifikátor kola">
 				<input class="accessible" type="submit">
 			</form>
 			<a class="button slate button-getcode">Získat kód zámku</a>
-			<p>Opište identifikátor z tabulky na kole a získáte kód zámku.</p>
-			<p>Od té chvíle máte kolo půjčené.</p>
+			
 		</script>
 
 		<script type="text/template" id="template-bikerented">
@@ -117,7 +118,7 @@
 			</header>
 			<div class="info">
 				<p>Kód zámku</p>
-				<strong><%- bike.unlockCode %></strong>
+				<strong><%- bike.lockCode %></strong>
 				<p>Štastnou cestu!</p>
 			</div>
 			<a class="button slate button-return">Vrátit kolo</a>
