@@ -216,6 +216,8 @@
 			<ul class="issues">
 				<% _.each(bike.fullIssues, function(issue) { %>
 					<li>
+						<a class="button slate button-go fright" data-go="bike/<%- bike.id %>/repair/<%- issue.id %>">Opravit</a>
+
 						<h3 class="title"><%- issue.title %></h3>
 						<% _.each(issue.updates, function(update) { %>
 							<p class="desc"><%- update.description %></p>
@@ -228,6 +230,46 @@
 
 			<a class="button slate button-go" data-go="bike/<%- bike.id %>/report">Nahlásit problém</a>
 		</script>
+
+		<script type="text/template" id="template-bikerepair">
+			<header>
+				<a class="button fleft button-go" data-go="bike/<%- bike.id %>"><%- bike.name %></a>
+				<h1>Oprava</h1>
+			</header>
+			<% if(bike.issues.length){
+				if(bike.operational) { %>
+					<div class="hasIssues"><i class="icon bug"></i> Pojízdné s problémy</div>
+				<% } else { %>
+					<div class="notOperational"><i class="icon error"></i> Nepojízdné</div>
+			<% }} %>
+			<form action>
+				<select name="issue" class="af-ui-forms">
+					<% _.each(bike.fullIssues, function(i) { %>
+						<option value="<%- i.id %>"	<% if(i.id==issueId){ %>selected<% } %>	>
+							<%- i.title %>
+						</option>
+					<% }); %>
+				</select>
+				<div>
+					<input class="af-ui-forms" type="checkbox" name="resolved" id="resolved"><label for="resolved">problém je vyřešen</label>
+				</div>
+				<div>
+					<div class="gcol2">
+						<label for="costs">Cena dílů</label>
+						<input type="text" name="costs" id="costs">
+					</div>
+					<div class="gcol2">
+						<label for="time">Čas</label>
+						<input type="text" name="time" id="time">
+					</div>
+				</div>
+				<textarea class="af-ui-forms" name="desc" rows="4" placeholder="Prosím, popište detailně průběh opravy"></textarea>
+
+				<input class="accessible" type="submit">
+			</form>
+			<a class="button slate button-repair">Opraveno</a>
+		</script>
+
 
 		<script type="text/javascript" charset="utf-8" src="build/rekola.js"></script>
 		<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>

@@ -3,10 +3,6 @@ var BikeIssuesView = BasePanelView.extend({
 
 	template: _.template($('#template-bikeissues').html()),
 
-	events: {
-		'submit form': ''
-	},
-
 	initialize: function(options) {
 		console.log('BikeIssuesView init', options);
 	},
