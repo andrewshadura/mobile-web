@@ -111,7 +111,11 @@
 				<%- bike.description %>
 			</p>
 			<a class="button slate button-getcode">Půjčit si kolo</a>
-			<a class="button button-go" data-go="bike/<%- bike.id %>/report">Nahlásit problém</a>
+			<% if(bike.issues.length){ %>
+				<a class="button button-go" data-go="bike/<%- bike.id %>/issues">Problémy...</a>
+			<% } else { %>
+				<a class="button button-go" data-go="bike/<%- bike.id %>/report">Nahlásit problém</a>
+			<% } %>
 		</script>
 
 		<script type="text/template" id="template-bikecode">
@@ -194,6 +198,35 @@
 				<input class="accessible" type="submit">
 			</form>
 			<a class="button slate button-report">Nahlásit problém</a>
+		</script>
+
+		<script type="text/template" id="template-bikeissues">
+			<header>
+				<a class="button fleft button-go" data-go="bike/<%- bike.id %>"><%- bike.name %></a>
+				<h1>Problémy</h1>
+			</header>
+			<% if(bike.issues.length){
+				if(bike.operational) { %>
+					<div class="hasIssues"><i class="icon bug"></i> Pojízdné s problémy</div>
+				<% } else { %>
+					<div class="notOperational"><i class="icon error"></i> Nepojízdné</div>
+			<% }} %>
+
+			<% if(bike.issues.length){ %>
+			<ul class="issues">
+				<% _.each(bike.fullIssues, function(issue) { %>
+					<li>
+						<h3 class="title"><%- issue.title %></h3>
+						<% _.each(issue.updates, function(update) { %>
+							<p class="desc"><%- update.description %></p>
+							<p class="sign"><span class="date"><%- update.issuedAt %></span> - <span class="author"><%- update.author %></span></p>
+						<% }); %>
+					</li>
+				<% }); %>
+			</ul>
+			<% } %>
+
+			<a class="button slate button-go" data-go="bike/<%- bike.id %>/report">Nahlásit problém</a>
 		</script>
 
 		<script type="text/javascript" charset="utf-8" src="build/rekola.js"></script>

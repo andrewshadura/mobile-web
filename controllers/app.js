@@ -129,6 +129,31 @@ var AppController = Backbone.View.extend({
 		});
 		this.renderSubview(view);
 	},
+	renderBikeIssues: function(id) {
+		var that = this;
+		var bike = this.bikes.get(id);
+		var view = new BikeIssuesView({
+			app: this,
+			model: bike
+		});
+
+		$.ui.showMask('Hledám problémy...');
+		that.ajax({
+			url: REKOLA.remoteUrl + '/bikes/' + id + '/issues?onlyOpen=1',
+			success: function(result) {
+				bike.set({
+					fullIssues: result
+				});
+				console.log(result, bike);
+				view.render();
+			},
+			complete: function() {
+				$.ui.hideMask();
+			}
+		});
+
+		this.renderSubview(view);
+	},
 
 	geolocate: function(callback) {
 		var that = this;
