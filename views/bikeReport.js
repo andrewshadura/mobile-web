@@ -17,7 +17,7 @@ var BikeReportView = BasePanelView.extend({
 		var id = this.model.get('id');
 		var title, operational, description;
 		title = this.$('form [name="title"]').val();
-		operational = this.$('form [name="operational"]').val();
+		operational = this.$('form [name="operational"]').get(0).checked;
 		description = this.$('form [name="desc"]').val();
 
 		$.ui.showMask('Nahlašuji problém...');
