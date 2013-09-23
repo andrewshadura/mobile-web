@@ -44,7 +44,7 @@ var AppController = Backbone.View.extend({
 			error: function(xhr) {
 				if(xhr.status == 404){
 					localStorage.removeItem(REKOLA.rentedBike);
-				}				
+				}
 			}
 		});
 	},
@@ -53,7 +53,7 @@ var AppController = Backbone.View.extend({
 		var that = this;
 
 		this.checkForRentedBike();
-		
+
 		// View instance
 		var view = new BikesNearbyView({
 			app: this,
@@ -62,7 +62,7 @@ var AppController = Backbone.View.extend({
 		this.renderSubview(view);
 		// Locate user to get nearby bikes from API
 		this.geolocate(function(pos) {
-			
+
 			$.ui.showMask('Načítám kola poblíž...');
 			that.ajax({
 				url: REKOLA.remoteUrl + '/bikes',
@@ -81,7 +81,7 @@ var AppController = Backbone.View.extend({
 					$.ui.hideMask();
 				}
 			});
-			
+
 		});
 	},
 	renderBikeDetail: function(id) {
@@ -151,8 +151,9 @@ var AppController = Backbone.View.extend({
 				console.log('Geolocation error: Position is unavailable!');
 			}
 			// Prompt for address and try to geocode it to GPS
-			var manualLocation = prompt('Lokalizace se nezdařila, zadej prosím tvojí adresu ručně:', '' /*localStorage.getItem('lastPosition')*/);
-			geocode(manualLocation);
+			var manualLoc = manualLocation();
+			localStorage.setItem(REKOLA.manualPosition, manualLoc);
+			geocode(manualLoc);
 		};
 		var geocode = function(address) {
 			var geocoder = new google.maps.Geocoder();
@@ -172,6 +173,11 @@ var AppController = Backbone.View.extend({
 					error();
 				}
 			});
+		};
+
+		var manualLocation = function() {
+			var answer = prompt('Lokalizace se nezdařila, zadej prosím tvojí adresu ručně:', localStorage.getItem(REKOLA.manualPosition));
+			return answer || manualLocation();
 		};
 
 		if(!navigator.geolocation) {
