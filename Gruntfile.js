@@ -12,6 +12,8 @@ module.exports = function(grunt) {
 			'libs/iscroll/dist/iscroll-lite-min.js',
 			'libs/underscore/underscore-min.js',
 			'libs/backbone/backbone-min.js',
+			// Configuration
+			'config.js',
 			// Models
 			'models/*.js',
 			// Views
