@@ -14,6 +14,7 @@ module.exports = function(grunt) {
 			'libs/backbone/backbone-min.js',
 			// Configuration
 			'config.js',
+			'config-defaults.js',
 			// Models
 			'models/*.js',
 			// Views

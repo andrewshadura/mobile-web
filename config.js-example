@@ -1,7 +1,3 @@
 REKOLA = {};
-REKOLA.baseUrl = document.location.href.replace(document.location.protocol + '//' + document.location.host, '').replace(document.location.hash, '');
-REKOLA.remoteUrl = 'http://rekola.clevis.org/server/api';
-REKOLA.apiKey = 'REKOLA-apiKey';
-REKOLA.rentedBike = 'REKOLA-rentedBike';
-REKOLA.manualPosition = 'REKOLA-manualPosition';
+REKOLA.remoteUrl = 'http://localhost/Clevis/ReKola/www/api';
 console.log('REKOLA', REKOLA);
