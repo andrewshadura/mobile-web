@@ -1,3 +1,0 @@
-REKOLA = {};
-REKOLA.remoteUrl = 'http://localhost/Clevis/ReKola/www/api';
-console.log('REKOLA', REKOLA);

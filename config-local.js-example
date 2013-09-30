@@ -1,0 +1,4 @@
+// Custom configuration overrides config.js
+REKOLA.remoteUrl = 'http://localhost/Clevis/ReKola/www/api';
+
+console.log('REKOLA config:', REKOLA);

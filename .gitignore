@@ -4,4 +4,4 @@
 
 build/*
 !build/.dir
-/config.js
+/config-local.js
