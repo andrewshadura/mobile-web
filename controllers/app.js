@@ -17,6 +17,7 @@ var AppController = Backbone.View.extend({
 		console.log('AppController init', options);
 		this.bikes = new BikeList();
 		this.$content = this.$('#content');
+		this.geolocate();
 	},
 
 	renderSubview: function(view, animation) {
@@ -61,7 +62,7 @@ var AppController = Backbone.View.extend({
 		});
 		this.renderSubview(view);
 		// Locate user to get nearby bikes from API
-		this.geolocate(function(pos) {
+		this.onGeolocation(function(pos) {
 
 			$.ui.showMask('Načítám kola poblíž...');
 			that.ajax({
@@ -171,9 +172,11 @@ var AppController = Backbone.View.extend({
 		this.renderSubview(view);
 	},
 
-	geolocate: function(callback) {
+	/**
+	 * Continuous geolocation by HTML5 Geolocation with fallback to Google Geocoder
+	 */
+	geolocate: function() {
 		var that = this;
-		$.ui.showMask('Lokalizuji...');
 
 		var success = function(position) {
 			console.log('Geolocated: ', position);
@@ -181,9 +184,7 @@ var AppController = Backbone.View.extend({
 				lat: position.coords.latitude,
 				lng: position.coords.longitude
 			};
-			// localStorage.setItem('lastPosition', that.userPosition);
-			$.ui.hideMask();
-			callback(that.userPosition);
+			that.trigger('geolocated');
 		};
 		var error = function(err) {
 			if(err.code == 1) {
@@ -221,13 +222,31 @@ var AppController = Backbone.View.extend({
 			return answer || manualLocation();
 		};
 
-		if(!navigator.geolocation) {
+		if("geolocation" in navigator) {
+			// navigator.geolocation.getCurrentPosition(success, error, {enableHighAccuracy: true, timeout: 15000, maximumAge: 600000});
+			that.geolocationWatcher = navigator.geolocation.watchPosition(success, error, {
+				enableHighAccuracy: true,
+				timeout: 30 * 1000,
+				maximumAge: 0
+			});
+		} else {
 			console.error('Browser doesn\'t support geolocation.');
 			error();
-		} else {
-			navigator.geolocation.getCurrentPosition(success, error, {enableHighAccuracy: true, timeout: 15000, maximumAge: 600000});
 		}
 
+	},
+	onGeolocation: function(callback) {
+		var that = this;
+		if(this.userPosition){
+			callback(this.userPosition);
+			return;
+		}
+		// wait for geolocation
+		$.ui.showMask('Lokalizuji...');
+		this.once('geolocated', function() {
+			callback(that.userPosition);
+			$.ui.hideMask();
+		});
 	},
 
 	addBike: function(bike) {

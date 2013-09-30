@@ -17,9 +17,9 @@ var BikeReturnView = BasePanelView.extend({
 		var mapWrap = this.$('.mapWrap');
 		var mapEl = mapWrap.find('.map').get(0);
 
-		this.options.app.geolocate(function(loc) {
+		this.options.app.onGeolocation(function(loc) {
 			var position = new google.maps.LatLng(loc.lat, loc.lng);
-			savePosition(position);
+			that.savePosition(position);
 
 			var gmap = new google.maps.Map(mapEl, {
 				center: position,
@@ -30,7 +30,7 @@ var BikeReturnView = BasePanelView.extend({
 			});
 			// Set bike position on map move
 			google.maps.event.addListener(gmap, 'bounds_changed', function(){
-				savePosition(gmap.getCenter());
+				that.savePosition(gmap.getCenter());
 			});
 			// Trigger repaint on map because of render delay
 			setTimeout(function() {
@@ -39,15 +39,15 @@ var BikeReturnView = BasePanelView.extend({
 				//mapWrap.css('height', mapWrap.height() + 'px'); // @TODO Fix map height
 			}, 250);
 		});
+	},
 
-		var savePosition = function(LatLng){
-			that.model.set({
-				location: {
-					lat: LatLng.lat(),
-					lng: LatLng.lng()
-				}
-			});
-		};
+	savePosition: function(LatLng){
+		this.model.set({
+			location: {
+				lat: LatLng.lat(),
+				lng: LatLng.lng()
+			}
+		});
 	},
 
 	doReturn: function(e) {

@@ -21,25 +21,27 @@ var BikeReportView = BasePanelView.extend({
 		description = this.$('form [name="desc"]').val();
 
 		$.ui.showMask('Nahlašuji problém...');
-		this.options.app.ajax({
-			type: 'POST',
-			url: REKOLA.remoteUrl + '/bikes/' + id + '/issues',
-			data: JSON.stringify({
-				title: title,
-				description: description,
-				disabling: !operational,
-				location: {
-					lat: that.options.app.userPosition.lat,
-					lng: that.options.app.userPosition.lng
+		this.options.app.onGeolocation(function(pos) {
+			that.options.app.ajax({
+				type: 'POST',
+				url: REKOLA.remoteUrl + '/bikes/' + id + '/issues',
+				data: JSON.stringify({
+					title: title,
+					description: description,
+					disabling: !operational,
+					location: {
+						lat: pos.lat,
+						lng: pos.lng
+					}
+				}),
+				success: function() {
+					alert('Problém nahlášen, děkujeme.');
+					that.options.app.go('/nearby');
+				},
+				complete: function() {
+					$.ui.hideMask();
 				}
-			}),
-			success: function() {
-				alert('Problém nahlášen, děkujeme.');
-				that.options.app.go('/nearby');
-			},
-			complete: function() {
-				$.ui.hideMask();
-			}
+			});
 		});
 
 		return false;

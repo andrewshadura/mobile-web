@@ -16,21 +16,28 @@ var BikeCodeView = BasePanelView.extend({
 	getCode: function(e) {
 		var that = this;
 		var bikeCode = this.$('.code').val();
+
 		$.ui.showMask('Získávám kód zámku...');
 
-		this.options.app.ajax({
-			url: REKOLA.remoteUrl + '/bikes/lock-code',
-			data: { bikeCode: bikeCode },
+		this.options.app.onGeolocation(function(pos) {
+			that.options.app.ajax({
+				url: REKOLA.remoteUrl + '/bikes/lock-code',
+				data: {
+					bikeCode: bikeCode,
+					lat: pos.lat,
+					lng: pos.lng
+				},
 
-			success: function(result) {
-				var bike = new Bike(result.bike);
-				bike.rent(bikeCode, result.lockCode);
-				that.options.app.addBike(bike);
-				that.options.app.go('bike/' + bike.id + '/rented');
-			},
-			complete: function() {
-				$.ui.hideMask();
-			}
+				success: function(result) {
+					var bike = new Bike(result.bike);
+					bike.rent(bikeCode, result.lockCode);
+					that.options.app.addBike(bike);
+					that.options.app.go('bike/' + bike.id + '/rented');
+				},
+				complete: function() {
+					$.ui.hideMask();
+				}
+			});
 		});
 
 		return false;

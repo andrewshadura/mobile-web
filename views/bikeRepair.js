@@ -22,28 +22,30 @@ var BikeRepairView = BasePanelView.extend({
 		var description = this.$('form [name="desc"]').val();
 
 		$.ui.showMask('Opravuji problém...');
-		this.options.app.ajax({
-			type: 'POST',
-			url: REKOLA.remoteUrl + '/bikes/' + bikeId + '/issues/' + id + '/updates',
-			data: JSON.stringify({
-				description: description,
-				open: !resolved,
-				costs: {
-					material: parseInt(costs, 10),
-					time: parseInt(time, 10)
+		this.options.app.onGeolocation(function(pos) {
+			that.options.app.ajax({
+				type: 'POST',
+				url: REKOLA.remoteUrl + '/bikes/' + bikeId + '/issues/' + id + '/updates',
+				data: JSON.stringify({
+					description: description,
+					open: !resolved,
+					costs: {
+						material: parseInt(costs, 10),
+						time: parseInt(time, 10)
+					},
+					location: {
+						lat: pos.lat,
+						lng: pos.lng
+					}
+				}),
+				success: function() {
+					alert('Oprava uložena, odměna tě nemine!');
+					that.options.app.go('/nearby');
 				},
-				location: {
-					lat: that.options.app.userPosition.lat,
-					lng: that.options.app.userPosition.lng
+				complete: function() {
+					$.ui.hideMask();
 				}
-			}),
-			success: function() {
-				alert('Oprava uložena, odměna tě nemine!');
-				that.options.app.go('/nearby');
-			},
-			complete: function() {
-				$.ui.hideMask();
-			}
+			});
 		});
 
 		return false;
