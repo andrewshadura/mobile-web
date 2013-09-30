@@ -249,6 +249,22 @@ var AppController = Backbone.View.extend({
 		});
 	},
 
+	ping: function() {
+		var that = this;
+		this.onGeolocation(function(pos) {
+			that.ajax({
+				type: 'POST',
+				url: REKOLA.remoteUrl + '/accounts/mine/ping',
+				data: JSON.stringify({
+					location: {
+						lat: pos.lat,
+						lng: pos.lng
+					}
+				})
+			});
+		});
+	},
+
 	addBike: function(bike) {
 		this.bikes.add(bike, { merge: true });
 	},
