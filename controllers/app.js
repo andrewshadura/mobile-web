@@ -164,6 +164,13 @@ var AppController = Backbone.View.extend({
 		this.renderSubview(view);
 	},
 
+	renderAccount: function() {
+		var view = new AccountView({
+			app: this
+		});
+		this.renderSubview(view);
+	},
+
 	geolocate: function(callback) {
 		var that = this;
 		$.ui.showMask('Lokalizuji...');

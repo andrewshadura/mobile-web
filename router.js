@@ -14,6 +14,7 @@ var AppRouter = Backbone.Router.extend({
 		'bike/:id/report': 'report',
 		'bike/:id/issues': 'issues',
 		'bike/:id/repair/:issueId': 'repair',
+		'account': 'account',
 		'*path':  'index'
 	},
 
@@ -63,6 +64,10 @@ var AppRouter = Backbone.Router.extend({
 	repair: function(id, issueId) {
 		console.log('router: repair', id, issueId);
 		this.options.app.renderBikeRepair(id, issueId);
+	},
+	account: function() {
+		console.log('router: account');
+		this.options.app.renderAccount();
 	},
 
 	// Alias for navigation
