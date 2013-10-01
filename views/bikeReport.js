@@ -13,12 +13,18 @@ var BikeReportView = BasePanelView.extend({
 	},
 
 	reportProblem: function(e) {
+		e.preventDefault();
 		var that = this;
 		var id = this.model.get('id');
 		var title, operational, description;
 		title = this.$('form [name="title"]').val();
 		operational = this.$('form [name="operational"]').get(0).checked;
 		description = this.$('form [name="desc"]').val();
+
+		if(description.length < 2){
+			alert('Popište prosím problém s kolem, pomůže to jeho nápravě!');
+			return;
+		}
 
 		$.ui.showMask('Nahlašuji problém...');
 		this.options.app.onGeolocation(function(pos) {
@@ -43,8 +49,6 @@ var BikeReportView = BasePanelView.extend({
 				}
 			});
 		});
-
-		return false;
 	},
 
 	render: function() {
