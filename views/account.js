@@ -4,7 +4,7 @@ var AccountView = BasePanelView.extend({
 	template: _.template($('#template-account').html()),
 
 	events: {
-		'click .button-changepass': 'changePassword',
+		'click .button-changePass': 'changePassword',
 		'click .button-logout': 'logout',
 		'submit form': 'changePassword'
 	},
