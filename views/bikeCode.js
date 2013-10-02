@@ -14,8 +14,14 @@ var BikeCodeView = BasePanelView.extend({
 	},
 
 	getCode: function(e) {
+		e.preventDefault();
 		var that = this;
 		var bikeCode = this.$('.code').val();
+
+		if(bikeCode.length <= 1){
+			alert('Zadejte prosím kód kola');
+			return;
+		}
 
 		$.ui.showMask('Získávám kód zámku...');
 
@@ -39,8 +45,6 @@ var BikeCodeView = BasePanelView.extend({
 				}
 			});
 		});
-
-		return false;
 	},
 
 	render: function() {
