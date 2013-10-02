@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 		'build/rekola.js': [
 			// Libraries
 			'libs/intel-appframework/appframework.min.js',
-			'libs/intel-appframework/ui/appframework.ui.min.js',
+			// 'libs/intel-appframework/ui/appframework.ui.min.js',
 			'libs/iscroll/dist/iscroll-lite-min.js',
 			'libs/underscore/underscore-min.js',
 			'libs/backbone/backbone-min.js',

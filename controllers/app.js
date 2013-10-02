@@ -1,6 +1,6 @@
 /* Application controller */
 var AppController = Backbone.View.extend({
-	el: $('#afui'),
+	el: $('#app'),
 
 	logged: false,
 	apiKey: '',
@@ -21,9 +21,7 @@ var AppController = Backbone.View.extend({
 	},
 
 	renderSubview: function(view, animation) {
-		this.$('#'+view.id).remove(); // remove old element
-		this.$content.append(view.render().el); // place a new one
-		$.ui.loadContent('#'+view.id, true, false, animation ? animation : 'slide'); // navigate UI to this panel
+		this.$el.empty().append(view.render().el);
 	},
 
 	renderLogin: function() {
@@ -64,7 +62,7 @@ var AppController = Backbone.View.extend({
 		// Locate user to get nearby bikes from API
 		this.onGeolocation(function(pos) {
 
-			$.ui.showMask('Načítám kola poblíž...');
+			that.showMask('Načítám kola poblíž...');
 			that.ajax({
 				url: REKOLA.remoteUrl + '/bikes',
 				data: {
@@ -76,10 +74,9 @@ var AppController = Backbone.View.extend({
 						that.addBike(new Bike(bikeData));
 					});
 					view.render();
-					var iscroll = new IScroll('#' + view.id);
 				},
 				complete: function() {
-					$.ui.hideMask();
+					that.hideMask();
 				}
 			});
 
@@ -138,8 +135,8 @@ var AppController = Backbone.View.extend({
 			model: bike
 		});
 
-		$.ui.showMask('Hledám problémy...');
-		that.ajax({
+		this.showMask('Hledám problémy...');
+		this.ajax({
 			url: REKOLA.remoteUrl + '/bikes/' + id + '/issues?onlyOpen=1',
 			success: function(result) {
 				bike.set({
@@ -149,7 +146,7 @@ var AppController = Backbone.View.extend({
 				view.render();
 			},
 			complete: function() {
-				$.ui.hideMask();
+				that.hideMask();
 			}
 		});
 
@@ -242,10 +239,10 @@ var AppController = Backbone.View.extend({
 			return;
 		}
 		// wait for geolocation
-		$.ui.showMask('Lokalizuji...');
+		this.showMask('Lokalizuji...');
 		this.once('geolocated', function() {
 			callback(that.userPosition);
-			$.ui.hideMask();
+			that.hideMask();
 		});
 	},
 
@@ -319,6 +316,16 @@ var AppController = Backbone.View.extend({
 				console.error('AJAX timeout error', xhr);
 				break;
 		}
+	},
+
+	showMask: function(message) {
+		var el = $('#app-loader');
+		el.find('.text').text(message);
+		el.addClass('active');
+	},
+	hideMask: function() {
+		$('#app-loader').removeClass('active');
 	}
+
 
 });

@@ -23,7 +23,7 @@ var BikeCodeView = BasePanelView.extend({
 			return;
 		}
 
-		$.ui.showMask('Získávám kód zámku...');
+		this.options.app.showMask('Získávám kód zámku...');
 
 		this.options.app.onGeolocation(function(pos) {
 			that.options.app.ajax({
@@ -41,7 +41,7 @@ var BikeCodeView = BasePanelView.extend({
 					that.options.app.go('bike/' + bike.id + '/rented');
 				},
 				complete: function() {
-					$.ui.hideMask();
+					that.options.app.hideMask();
 				}
 			});
 		});

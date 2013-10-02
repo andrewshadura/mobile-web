@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 
 		<title>ReKola</title>
@@ -11,21 +11,24 @@
 	</head>
 
 	<body>
-		<div id="afui">
+		<div id="app">
 
-			<div id="header">
-				<h1 id="pageTitle">ReKola</h1>
+			<div id="splashscreen">
+				<h1>ReKola</h1>
+				<div class="wrap">
+					<img src="img/logo.svg" onerror="this.onerror=null; this.src='img/logo.png'">
+					<p>Rozjíždím aplikaci...</p>
+				</div>
 			</div>
 
-			<div id="content">
+		</div>
 
-				<div id="splashscreen">
-					<div class="wrap">
-						<img src="img/logo.svg" onerror="this.onerror=null; this.src='img/logo.png'">
-						<p>Rozjíždím aplikaci...</p>
-					</div>
+		<div id="app-loader">
+			<div class="wrap">
+				<div class="box">
+					<span class='icon spin'></span>
+					<div class="text">Načítám...</div>
 				</div>
-
 			</div>
 		</div>
 
@@ -35,40 +38,40 @@
 				<h1>ReKola - přihlášení</h1>
 			</header>
 			<form action>
-				<input class="username" type="text" placeholder="Jméno">
-				<input class="password" type="password" placeholder="Heslo">
+				<input class="username form-control" type="text" placeholder="Jméno">
+				<input class="password form-control" type="password" placeholder="Heslo">
 				<input class="accessible" type="submit">
 			</form>
-			<a class="button slate button-login">Přihlásit se</a>
+			<a class="btn btn-primary button-login">Přihlásit se</a>
 		</script>
 
 		<script type="text/template" id="template-account">
 			<header>
-				<a class="button fright button-go" data-go="bike/getcode">Půjčit si kolo</a>
-				<a class="button fleft button-go" data-go="nearby">Kola okolo</a>
+				<a class="btn btn-default btn-sm fright button-go" data-go="bike/getcode">Půjčit si kolo</a>
+				<a class="btn btn-default btn-sm fleft button-go" data-go="nearby">Kola okolo</a>
 				<h1>Můj účet</h1>
 			</header>
 
 			<form class="password" action>
 				<h2>Změna hesla</h2>
-				<input type="password" name="oldPass" placeholder="původní heslo">
-				<input type="password" name="newPass" placeholder="nové heslo">
-				<input type="password" name="newPassConfirm" placeholder="nové heslo znovu pro kontrolu">
+				<input class="form-control" type="password" name="oldPass" placeholder="původní heslo">
+				<input class="form-control" type="password" name="newPass" placeholder="nové heslo">
+				<input class="form-control" type="password" name="newPassConfirm" placeholder="nové heslo znovu pro kontrolu">
 				<input class="accessible" type="submit">
 
-				<a class="button slate button-changePass">Změnit heslo</a>
+				<a class="btn btn-danger button-changePass">Změnit heslo</a>
 			</form>
 
 			<h2>Správa</h2>
-			<a class="button slate button-logout">Odhlásit se</a>
+			<a class="btn btn-primary button-logout">Odhlásit se</a>
 
 		</script>
 
 		<script type="text/template" id="template-bikesnearby">
 			<div>
 				<header>
-					<a class="button fright button-go" data-go="bike/getcode">Půjčit si kolo</a>
-					<a class="button fleft button-go" data-go="account">Můj účet</a>
+					<a class="btn btn-default btn-sm fright button-go" data-go="bike/getcode">Půjčit si kolo</a>
+					<a class="btn btn-default btn-sm fleft button-go" data-go="account">Můj účet</a>
 					<h1>Kola okolo</h1>
 				</header>
 				<div class="bikeList-wrap">
@@ -95,8 +98,8 @@
 
 		<script type="text/template" id="template-bikedetail">
 			<header>
-				<a class="button fright button-go" data-go="bike/getcode">Půjčit si kolo</a>
-				<a class="button fleft button-go" data-go="nearby">Kola okolo</a>
+				<a class="btn btn-default btn-sm fright button-go" data-go="bike/getcode">Půjčit si kolo</a>
+				<a class="btn btn-default btn-sm fleft button-go" data-go="nearby">Kola okolo</a>
 				<h1><%- bike.name %></h1>
 			</header>
 			<% if(bike.issues.length){
@@ -121,26 +124,26 @@
 			<p class="note">
 				<%- bike.description %>
 			</p>
-			<a class="button slate button-getcode">Půjčit si kolo</a>
+			<a class="btn btn-primary button-getcode">Půjčit si kolo</a>
 			<% if(bike.issues.length){ %>
-				<a class="button button-go" data-go="bike/<%- bike.id %>/issues">Problémy...</a>
+				<a class="btn btn-default button-go" data-go="bike/<%- bike.id %>/issues">Problémy...</a>
 			<% } else { %>
-				<a class="button button-go" data-go="bike/<%- bike.id %>/report">Nahlásit problém</a>
+				<a class="btn btn-default button-go" data-go="bike/<%- bike.id %>/report">Nahlásit problém</a>
 			<% } %>
 		</script>
 
 		<script type="text/template" id="template-bikecode">
 			<header>
-				<a class="button fleft button-go" data-go="nearby">Kola okolo</a>
+				<a class="btn btn-default btn-sm fleft button-go" data-go="nearby">Kola okolo</a>
 				<h1>Půjčit si kolo</h1>
 			</header>
 			<p>Opište identifikátor z tabulky na kole a získáte kód zámku.</p>
 			<p>Od té chvíle máte kolo půjčené.</p>
 			<form action>
-				<input type="text" class="code" placeholder="identifikátor kola">
+				<input type="text" class="code form-control" placeholder="identifikátor kola">
 				<input class="accessible" type="submit">
 			</form>
-			<a class="button slate button-getcode">Získat kód zámku</a>
+			<a class="btn btn-primary button-getcode">Získat kód zámku</a>
 
 		</script>
 
@@ -153,13 +156,13 @@
 				<strong><%- bike.lockCode %></strong>
 				<p>Štastnou cestu!</p>
 			</div>
-			<a class="button slate button-return">Vrátit kolo</a>
-			<a class="button button-go" data-go="bike/<%- bike.id %>/report">Nahlásit problém</a>
+			<a class="btn btn-primary button-return">Vrátit kolo</a>
+			<a class="btn btn-default button-go" data-go="bike/<%- bike.id %>/report">Nahlásit problém</a>
 		</script>
 
 		<script type="text/template" id="template-bikereturn">
 			<header>
-				<a class="button fleft button-go" data-go="bike/<%- bike.id %>/rented">Jedu dál</a>
+				<a class="btn btn-default btn-sm fleft button-go" data-go="bike/<%- bike.id %>/rented">Jedu dál</a>
 				<h1>Vrátit kolo</h1>
 			</header>
 			<p class="address"></p>
@@ -169,11 +172,11 @@
 				<div class="map"></div>
 			</div>
 			<form action>
-				<textarea placeholder="Upřesněte prosím, kde kolo stojí (např. 3. lampa od ulice X)"></textarea>
+				<textarea class="form-control" placeholder="Upřesněte prosím, kde kolo stojí (např. 3. lampa od ulice X)"></textarea>
 				<input class="accessible" type="submit">
 			</form>
-			<a class="button slate button-return">Kolo vráceno a uzamčeno</a>
-			<a class="button button-go" data-go="bike/<%- bike.id %>/report">Nahlásit problém</a>
+			<a class="btn btn-primary button-return">Kolo vráceno a uzamčeno</a>
+			<a class="btn btn-default button-go" data-go="bike/<%- bike.id %>/report">Nahlásit problém</a>
 		</script>
 
 		<script type="text/template" id="template-bikereturned">
@@ -182,16 +185,16 @@
 			</header>
 			<p>Kolo bylo vráceno</p>
 			<p>Těšíme se, že se brzy zase svezete.</p>
-			<a class="button slate button-nearby">Seznam kol v okolí</a>
+			<a class="btn btn-primary button-nearby">Seznam kol v okolí</a>
 		</script>
 
 		<script type="text/template" id="template-bikereport">
 			<header>
-				<a class="button fleft button-go" data-go="bike/<%- bike.id %>"><%- bike.name %></a>
+				<a class="btn btn-default btn-sm fleft button-go" data-go="bike/<%- bike.id %>"><%- bike.name %></a>
 				<h1>Nový problém</h1>
 			</header>
 			<form action>
-				<select name="title" class="af-ui-forms">
+				<select name="title" class="form-control">
 					<option value="Kolo tu není">Kolo tu není</option>
 					<option value="Kod zámku nefunguje">Kod zámku nefunguje</option>
 					<option value="Píchlá duše">Píchlá duše</option>
@@ -202,19 +205,20 @@
 					<option value="Bál bych se na tom jet">Bál bych se na tom jet</option>
 					<option value="JIný problém">JIný problém</option>
 				</select>
-				<div>
-					<input class="af-ui-forms" type="checkbox" name="operational" id="operational"><label for="operational">kolo je pojízdné</label>
+				<div class="checkbox">
+					<input type="checkbox" name="operational" id="operational">
+					<label for="operational">kolo je pojízdné</label>
 				</div>
-				<textarea class="af-ui-forms" name="desc" rows="4" placeholder="Prosím, popište detailně problém na kole"></textarea>
+				<textarea class="form-control" name="desc" rows="4" placeholder="Prosím, popište detailně problém na kole"></textarea>
 
 				<input class="accessible" type="submit">
 			</form>
-			<a class="button slate button-report">Nahlásit problém</a>
+			<a class="btn btn-primary button-report">Nahlásit problém</a>
 		</script>
 
 		<script type="text/template" id="template-bikeissues">
 			<header>
-				<a class="button fleft button-go" data-go="bike/<%- bike.id %>"><%- bike.name %></a>
+				<a class="btn btn-default btn-sm fleft button-go" data-go="bike/<%- bike.id %>"><%- bike.name %></a>
 				<h1>Problémy</h1>
 			</header>
 			<% if(bike.issues.length){
@@ -228,7 +232,7 @@
 			<ul class="issues">
 				<% _.each(bike.fullIssues, function(issue) { %>
 					<li>
-						<a class="button slate button-go fright" data-go="bike/<%- bike.id %>/repair/<%- issue.id %>">Opravit</a>
+						<a class="btn btn-default btn-xs button-go fright" data-go="bike/<%- bike.id %>/repair/<%- issue.id %>">Opravit</a>
 
 						<h3 class="title"><%- issue.title %></h3>
 						<% _.each(issue.updates, function(update) { %>
@@ -240,12 +244,12 @@
 			</ul>
 			<% } %>
 
-			<a class="button slate button-go" data-go="bike/<%- bike.id %>/report">Nahlásit problém</a>
+			<a class="btn btn-primary button-go" data-go="bike/<%- bike.id %>/report">Nahlásit problém</a>
 		</script>
 
 		<script type="text/template" id="template-bikerepair">
 			<header>
-				<a class="button fleft button-go" data-go="bike/<%- bike.id %>"><%- bike.name %></a>
+				<a class="btn btn-default btn-sm fleft button-go" data-go="bike/<%- bike.id %>"><%- bike.name %></a>
 				<h1>Oprava</h1>
 			</header>
 			<% if(bike.issues.length){
@@ -255,31 +259,32 @@
 					<div class="notOperational"><i class="icon error"></i> Nepojízdné</div>
 			<% }} %>
 			<form action>
-				<select name="issue" class="af-ui-forms">
+				<select name="issue" class="form-control">
 					<% _.each(bike.fullIssues, function(i) { %>
 						<option value="<%- i.id %>"	<% if(i.id==issueId){ %>selected<% } %>	>
 							<%- i.title %>
 						</option>
 					<% }); %>
 				</select>
-				<div>
-					<input class="af-ui-forms" type="checkbox" name="resolved" id="resolved"><label for="resolved">problém je vyřešen</label>
+				<div class="checkbox">
+					<input type="checkbox" name="resolved" id="resolved">
+					<label for="resolved">problém je vyřešen</label>
 				</div>
 				<div class="expenses">
 					<div class="gcol2">
 						<label for="costs">Cena dílů</label>
-						<input type="text" name="costs" id="costs" value="0">
+						<input class="form-control" type="text" name="costs" id="costs" value="0">
 					</div>
 					<div class="gcol2">
 						<label for="time">Čas</label>
-						<input type="text" name="time" id="time" value="0">
+						<input class="form-control" type="text" name="time" id="time" value="0">
 					</div>
 				</div>
-				<textarea class="af-ui-forms" name="desc" rows="4" placeholder="Prosím, popište detailně průběh opravy"></textarea>
+				<textarea class="form-control" name="desc" rows="4" placeholder="Prosím, popište detailně průběh opravy"></textarea>
 
 				<input class="accessible" type="submit">
 			</form>
-			<a class="button slate button-repair">Opraveno</a>
+			<a class="btn btn-primary button-repair">Opraveno</a>
 		</script>
 
 

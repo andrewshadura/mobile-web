@@ -21,7 +21,7 @@ var BikeRepairView = BasePanelView.extend({
 		var time = this.$('form [name="time"]').val();
 		var description = this.$('form [name="desc"]').val();
 
-		$.ui.showMask('Opravuji problém...');
+		this.options.app.showMask('Opravuji problém...');
 		this.options.app.onGeolocation(function(pos) {
 			that.options.app.ajax({
 				type: 'POST',
@@ -43,7 +43,7 @@ var BikeRepairView = BasePanelView.extend({
 					that.options.app.go('/nearby');
 				},
 				complete: function() {
-					$.ui.hideMask();
+					that.options.app.hideMask();
 				}
 			});
 		});

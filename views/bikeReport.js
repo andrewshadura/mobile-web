@@ -26,7 +26,7 @@ var BikeReportView = BasePanelView.extend({
 			return;
 		}
 
-		$.ui.showMask('Nahlašuji problém...');
+		this.options.app.showMask('Nahlašuji problém...');
 		this.options.app.onGeolocation(function(pos) {
 			that.options.app.ajax({
 				type: 'POST',
@@ -45,7 +45,7 @@ var BikeReportView = BasePanelView.extend({
 					that.options.app.go('/nearby');
 				},
 				complete: function() {
-					$.ui.hideMask();
+					that.options.app.hideMask();
 				}
 			});
 		});

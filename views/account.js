@@ -15,6 +15,7 @@ var AccountView = BasePanelView.extend({
 
 	changePassword: function(e) {
 		e.preventDefault();
+		var that = this;
 		var form = this.$('form.password');
 		var oldPass = this.$('input[name="oldPass"]').val();
 		var newPass = this.$('input[name="newPass"]').val();
@@ -25,7 +26,7 @@ var AccountView = BasePanelView.extend({
 			return false;
 		}
 
-		$.ui.showMask('Měním heslo...');
+		this.options.app.showMask('Měním heslo...');
 		this.options.app.ajax({
 			type: 'PUT',
 			url: REKOLA.remoteUrl + '/accounts/mine/password',
@@ -37,7 +38,7 @@ var AccountView = BasePanelView.extend({
 				form.get(0).reset();
 			},
 			complete: function() {
-				$.ui.hideMask();
+				that.options.app.hideMask();
 			}
 		});
 	},

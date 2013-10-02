@@ -21,8 +21,8 @@ var LoginView = BasePanelView.extend({
 		var that = this;
 		var username = this.$('.username').val();
 		var password = this.$('.password').val();
-		$.ui.showMask('Přihlašuji...');
-		// @TODO waits for API specs
+
+		this.options.app.showMask('Přihlašuji...');
 		$.ajax({
 			type: 'POST',
 			url: REKOLA.remoteUrl + '/accounts/mine/login',
@@ -42,12 +42,13 @@ var LoginView = BasePanelView.extend({
 				} else {
 					alert('Přihlášení se nezdařilo, zkuste to znovu.');
 				}
-				$.ui.hideMask();
 			},
 			error: function(xhr) {
 				console.error('Login failed', xhr);
 				alert('Přihlášení se nezdařilo, zkuste to znovu.');
-				$.ui.hideMask();
+			},
+			complete: function() {
+				that.options.app.hideMask();
 			}
 		});
 

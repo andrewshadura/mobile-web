@@ -56,7 +56,7 @@ var BikeReturnView = BasePanelView.extend({
 		var loc = this.model.get('location');
 		var note = this.$('textarea').val();
 
-		$.ui.showMask('Vracím kolo...');
+		this.options.app.showMask('Vracím kolo...');
 		this.options.app.ajax({
 			type: 'PUT',
 			url: REKOLA.remoteUrl + '/bikes/' + id + '/return',
@@ -73,7 +73,7 @@ var BikeReturnView = BasePanelView.extend({
 				that.options.app.go('/bike/' + id + '/returned');
 			},
 			complete: function() {
-				$.ui.hideMask();
+				that.options.app.hideMask();
 			}
 		});
 	},
