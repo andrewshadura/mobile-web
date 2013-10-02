@@ -1,5 +1,5 @@
 /**
- * af.scroller
+ * af.scroller 
  * created by appMobi with modifications by Carlos Ouro @ Badoo and Intel
  * Supports iOS native touch scrolling
  * Optimizations and bug improvements by Intel
@@ -377,12 +377,12 @@
 
         };
         nativeScroller = function (el, opts) {
-
+           
             if(opts.nativeParent){
                 el=el.parentNode;
             }
             this.init(el, opts);
-
+            
             var $el = $(el);
 
             if (opts.noParent !== true) {
@@ -460,13 +460,13 @@
             }
         };
         nativeScroller.prototype.onTouchStart = function (e) {
-
+            
 
             if(this.el.scrollTop===0)
                 this.el.scrollTop=1;
             if(this.el.scrollTop===(this.el.scrollHeight - this.el.clientHeight))
                 this.el.scrollTop-=1;
-
+            
             if(this.horizontalScroll){
                 if(this.el.scrollLeft===0)
                     this.el.scrollLeft=1;
@@ -485,10 +485,10 @@
 
                 }
             }
-
+           
         };
         nativeScroller.prototype.onTouchMove = function (e) {
-
+           
             var newcY = e.touches[0].pageY - this.dY;
             var newcX = e.touches[0].pageX - this.dX;
             if(this.hasVertScroll&&this.el.clientHeight==this.el.scrollHeight){
@@ -891,8 +891,10 @@
             this.lastScrollInfo = scrollInfo;
             this.hasMoved = false;
 
-            this.scrollerMoveCSS(this.lastScrollInfo, 0);
-
+           if(this.elementInfo.maxTop==0&&this.elementInfo.maxLeft==0)
+                this.currentScrollingObject=null;
+            else
+                this.scrollerMoveCSS(this.lastScrollInfo, 0);
 
         };
         jsScroller.prototype.getCSSMatrix = function (el) {
@@ -1087,7 +1089,7 @@
 
         };
 
-
+       
 
         jsScroller.prototype.calculateMovement = function (event, last) {
             //default variables
@@ -1141,7 +1143,7 @@
 
             var minLeft=this.container.clientWidth/2;
             var maxLeft=this.elementInfo.maxLeft+minLeft;
-
+            
             if (scrollInfo.x > minLeft) scrollInfo.x = minLeft;
             else if (-scrollInfo.x > maxLeft) scrollInfo.x = -maxLeft;
             else return;

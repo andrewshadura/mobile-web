@@ -70,16 +70,15 @@
             else{
                 $(window).one("afui:init", function() {
         		  that.autoBoot();  
-			     });
+                });
             }
         } else $(document).ready(function() {
                 if(that.init)
                     that.autoBoot();
                 else{
-				    $(window).one("afui:init", function() {
-                    
-					   that.autoBoot();
-				    });
+                    $(window).one("afui:init", function() {
+                        that.autoBoot();
+                    });
                 }
             }, false);
 
@@ -110,14 +109,25 @@
                     }));
                 } else if ($.os.blackberry||$.os.blackberry10||$.os.playbook) {
                     $("#afui").addClass("bb");
-                    that.backButtonText = "Back";
-                    $("head").find("#bb10VisibilityHack").remove();
-                    $("head").append("<style id='bb10VisibilityHack'>#afui .panel {-webkit-backface-visibility:visible  !important}</style>");
+                    that.backButtonText = "Back";                
                 } else if ($.os.ios7)
                     $("#afui").addClass("ios7");
                 else if ($.os.ios)
                     $("#afui").addClass("ios");
             }
+            //BB 10 hack to work with any theme
+            if ($.os.blackberry||$.os.blackberry10||$.os.playbook)
+            {
+                $("head").find("#bb10VisibilityHack").remove();
+                $("head").append("<style id='bb10VisibilityHack'>#afui .panel {-webkit-backface-visibility:visible  !important}</style>");
+            }
+            /** iOS 7 will get blurry if you use the perspective hack, so we remove it */
+            /** @TODO - refactor CSS to not use the perspective hack and move the ios5/6 hacks here */
+            else if($.os.ios7){
+                $("head").find("#ios7BlurrHack").remove();
+                $("head").append("<style id='ios7BlurrHack'>#afui .panel {-webkit-perspective:0  !important}</style>");   
+            }
+            //iOS 7 specific hack */
 
         }
     };
@@ -334,7 +344,8 @@
            $.ui.showBackButton = false; //
          * @title $.ui.showBackButton
          */
-        showBackbutton: true,
+        showBackbutton: true, // Kept for backward compatibility.
+        showBackButton: true,
         /**
          *  Override the back button text
             ```
@@ -886,6 +897,12 @@
 
                 this.scrollToTop('modal');
                 modalDiv.data("panel", id);
+                var myPanel=$panel.get(0);
+                var fnc = myPanel.getAttribute("data-load");
+                if (typeof fnc == "string" && window[fnc]) {
+                    window[fnc](myPanel);
+                }
+                $panel.trigger("loadpanel");
 
             }
         },
@@ -1202,19 +1219,7 @@
             $(what).trigger("loadpanel");
             if (this.isSideMenuOn()) {
                 var that = this;
-                that.toggleSideMenu(false);
-                /* $("#menu").width(window.innerWidth);
-
-                $(".hasMenu").css3Animate({
-                    x: (window.innerWidth + 100),
-                    time: that.transitionTime,
-                    complete: function() {
-                        $("#menu").width(that.sideMenuWidth);
-                        that.toggleSideMenu(false);
-
-                    }
-                });
-                */
+                that.toggleSideMenu(false);               
             }
         },
         /**
@@ -1318,11 +1323,12 @@
             var currWhat = what;
 
             if (what.getAttribute("data-modal") == "true" || what.getAttribute("modal") == "true") {
-                var fnc = what.getAttribute("data-load");
+                /*var fnc = what.getAttribute("data-load");
                 if (typeof fnc == "string" && window[fnc]) {
                     window[fnc](what);
                 }
-                $(what).trigger("loadpanel");
+                $(what).trigger("loadpanel");                
+                */
                 return this.showModal(what.id);
             }
 
@@ -1403,7 +1409,7 @@
                 this.setBackButtonVisibility(false);
                 this.history = [];
                 $("#header #menubadge").css("float", "left");
-            } else if (this.showBackbutton) this.setBackButtonVisibility(true);
+            } else if (this.showBackButton && this.showBackbutton) this.setBackButtonVisibility(true);
             this.activeDiv = what;
             if (this.scrollingDivs[this.activeDiv.id]) {
                 this.scrollingDivs[this.activeDiv.id].enable(this.resetScrollers);
