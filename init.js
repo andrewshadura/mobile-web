@@ -10,3 +10,14 @@ window.onload = function() {
 	});
 	console.log('app.js:init done');
 };
+
+// Test localStorage support
+function supports_html5_storage() {
+	try {
+		return 'localStorage' in window && window['localStorage'] !== null;
+	} catch (e) {
+		return false;
+	}
+}
+console.log('localStorage support:', supports_html5_storage());
+
