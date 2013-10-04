@@ -13,11 +13,12 @@ var LoginView = BasePanelView.extend({
 		if(apiKey){
 			this.options.app.apiKey = apiKey;
 			this.options.app.logged = true;
-			this.options.app.go('index');
+			this.options.app.go('nearby');
 		}
 	},
 
 	doLogin: function(e) {
+		e.preventDefault();
 		var that = this;
 		var username = this.$('.username').val();
 		var password = this.$('.password').val();
@@ -51,8 +52,6 @@ var LoginView = BasePanelView.extend({
 				that.options.app.hideMask();
 			}
 		});
-
-		return false;
 	}
 
 });
