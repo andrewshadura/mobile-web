@@ -24,8 +24,10 @@ var BikesNearbyView = BasePanelView.extend({
 
 		//gmaps static my position + 10 closest bikes positions
 		if(params.position) {
+			var width = $('#app').width(); //to determine the right width we need html: overflow-h: scroll
+			width = width>640 ? 640 : width; //google maps can handle this, but this way we know the width
 			params.gmapsStaticUrl = 'http://maps.googleapis.com/maps/api/staticmap?key=AIzaSyCWUjiJIxtc8IGKGIFXaANqKXPaAup9DsI&sensor=true&visual_refresh=true';
-			params.gmapsStaticUrl += '&size='+document.documentElement.clientWidth+'x300';
+			params.gmapsStaticUrl += '&size='+width+'x300';
 			//params.gmapsStaticUrl += '&style=feature:all|element:geometry';
 			//params.gmapsStaticUrl += '&zoom=16';
 			//params.gmapsStaticUrl += '&maptype=terrain'; //roadmap/terrain

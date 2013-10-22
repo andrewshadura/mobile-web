@@ -74,7 +74,11 @@
 					<a class="btn btn-default btn-sm fleft button-go" data-go="account">Můj účet</a>
 					<h1>Kola okolo</h1>
 				</header>
-				<img src="<%- gmapsStaticUrl %>">
+				<% if(gmapsStaticUrl){ %>
+					<div style="margin: 0 -10px;">
+						<img src="<%- gmapsStaticUrl %>">
+					</div>
+				<% } %>
 				<div class="bikeList-wrap">
 					<ul class="list bikesList">
 						<% _.each(bikes, function(bike){ %>
