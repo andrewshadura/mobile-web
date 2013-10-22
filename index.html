@@ -150,6 +150,10 @@
 			</form>
 			<a class="btn btn-primary button-getcode">Získat kód zámku</a>
 
+			<p><i>Na kole zkontroluj nafouknuté duše a utažení šroubů.</i>
+			<% if((new Date).getHours() >= 20 || (new Date).getHours() <= 6){ %>
+				<p><b>Rozsviť světla!</b> Pokud je tma, bez světel nevyjížděj.
+			<% } %>
 		</script>
 
 		<script type="text/template" id="template-bikerented">
