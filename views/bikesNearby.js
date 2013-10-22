@@ -31,13 +31,15 @@ var BikesNearbyView = BasePanelView.extend({
 			//params.gmapsStaticUrl += '&style=feature:all|element:geometry';
 			//params.gmapsStaticUrl += '&zoom=16';
 			//params.gmapsStaticUrl += '&maptype=terrain'; //roadmap/terrain
-			for (var i = 0; (i < 5 && i < params.bikes.length); i++) {
-				var loc = params.bikes[i].location;
-				params.gmapsStaticUrl += '&markers=label:'+(i+1)+'%7C' + loc.lat + ',' + loc.lng;
-			}
 			params.gmapsStaticUrl += '&markers=color:blue%7C' + params.position;
-		}
+			for (var i = 0; i < params.bikes.length; i++) {
+				var loc = params.bikes[i].location;
+				if (i > 5 && !loc.distance.match(/^[0-9]+ m/))
+					continue;
 
+				params.gmapsStaticUrl += '&markers=size:small%7C' + loc.lat + ',' + loc.lng;
+			}
+		}
 
 		this.$el.html(this.template(params));
 		return this;
