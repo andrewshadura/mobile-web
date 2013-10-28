@@ -215,8 +215,8 @@ var AppController = Backbone.View.extend({
 		};
 
 		var manualLocation = function() {
-			var answer = prompt('Lokalizace se nezdařila, zadej prosím tvojí adresu ručně:', localStorage.getItem(REKOLA.manualPosition));
-			return answer || manualLocation();
+			var answer = prompt('Lokalizace se nezdařila, zadej prosím tvojí adresu ručně (pokud nic nevyplníš, lokalizujeme tě do centra Prahy):', localStorage.getItem(REKOLA.manualPosition));
+			return answer || "Praha, ČR";
 		};
 
 		if("geolocation" in navigator) {
