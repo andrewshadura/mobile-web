@@ -87,11 +87,14 @@
 						<% _.each(bikes, function(bike){ %>
 							<li class="bikeDetail" data-id="<%- bike.id %>">
 								<span class="distance">
-									<%- bike.location.distance %>
+									<strong><%- bike.location.distance %></strong>
 									<% if(bike.issues.length){
 										if(bike.operational) { %>&nbsp;<i class="icon bug"></i>
 										<% } else { %>&nbsp;<i class="icon error"></i>
 									<% }} %>
+									<% if(bike.lastSeen) { %>
+										<br><small><%- bike.lastSeen %></small>
+									<% } %>
 								</span>
 								<span class="right">
 									<span class="wrap"><span class="name"><%- bike.name %></span>
