@@ -25,8 +25,11 @@ var BikeReturnView = BasePanelView.extend({
 				center: position,
 				zoom: 17,
 				mapTypeId: google.maps.MapTypeId.ROADMAP,
-				mapTypeControl: false,
-				disableDefaultUI: true
+				disableDefaultUI: true,
+				zoomControl: true,
+				zoomControlOptions: {
+					style: google.maps.ZoomControlStyle.SMALL
+				}
 			});
 			// Set bike position on map move
 			google.maps.event.addListener(gmap, 'bounds_changed', function(){
