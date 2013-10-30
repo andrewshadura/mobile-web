@@ -13,35 +13,46 @@ var BikesNearbyView = BasePanelView.extend({
 		this.listenTo(this.model, 'destroy', this.remove);
 	},
 
+	staticMapLink: function(position, bikes) {
+		if(!position) return false;
+
+		var url = 'http://maps.googleapis.com/maps/api/staticmap';
+		var markers = 'size:mid';
+
+		// Google Static Maps API URL options
+		var options = {
+			key: 'AIzaSyCWUjiJIxtc8IGKGIFXaANqKXPaAup9DsI',
+			sensor: true,
+			visual_refresh: true,
+			size: $('#app').width() + 'x300',
+			markers: 'color:blue|' + position,
+			scale: 2,
+			format: 'jpg'
+		};
+
+		// Assumption that bikes are sorted by distance from current position
+		var count = Math.min(bikes.length, 5); // Show max 5 bikes on map
+		for (var i = 0; i < count; i++) {
+			var bike = bikes[i];
+			markers += '|' + bike.location.lat + ',' + bike.location.lng;
+		}
+
+		// Construct final url with all options properly encoded
+		return url + '?' + $.param(options) + '&' + $.param({markers: markers});
+	},
+
 	render: function() {
 		console.log('BikesNearbyView render');
 
-		var params = {
-			position: this.options.app.userPosition ? (this.options.app.userPosition.lat + ', ' + this.options.app.userPosition.lng) : false,
-			bikes: this.model.toJSON(),
-			gmapsStaticUrl: ''
-		};
+		var position = this.options.app.userPosition ? (this.options.app.userPosition.lat + ',' + this.options.app.userPosition.lng) : false;
+		var bikes = this.model.toJSON();
 
-		//gmaps static my position + 10 closest bikes positions
-		if(params.position) {
-			var width = $('#app').width(); //to determine the right width we need html: overflow-h: scroll
-			width = width>640 ? 640 : width; //google maps can handle this, but this way we know the width
-			params.gmapsStaticUrl = 'http://maps.googleapis.com/maps/api/staticmap?key=AIzaSyCWUjiJIxtc8IGKGIFXaANqKXPaAup9DsI&sensor=true&visual_refresh=true';
-			params.gmapsStaticUrl += '&size='+width+'x300';
-			//params.gmapsStaticUrl += '&style=feature:all|element:geometry';
-			//params.gmapsStaticUrl += '&zoom=16';
-			//params.gmapsStaticUrl += '&maptype=terrain'; //roadmap/terrain
-			params.gmapsStaticUrl += '&markers=color:blue%7C' + params.position;
-			for (var i = 0; i < params.bikes.length; i++) {
-				var loc = params.bikes[i].location;
-				if (i > 5 && !loc.distance.match(/^[0-9]+ m/))
-					continue;
+		this.$el.html(this.template({
+			position: position,
+			bikes: bikes,
+			gmapsStaticUrl: this.staticMapLink(position, bikes)
+		}));
 
-				params.gmapsStaticUrl += '&markers=size:small%7C' + loc.lat + ',' + loc.lng;
-			}
-		}
-
-		this.$el.html(this.template(params));
 		return this;
 	},
 
