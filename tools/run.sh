@@ -4,7 +4,7 @@
 # Build and deploy process of the client application (ie. origin/app)
 #
 
-cd /www/rekola-dev/client
+cd /www/rekola-mobile-dev
 git fetch
 git reset origin/app --hard
 npm install
