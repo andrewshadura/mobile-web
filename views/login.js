@@ -46,7 +46,12 @@ var LoginView = BasePanelView.extend({
 			},
 			error: function(xhr) {
 				console.error('Login failed', xhr);
-				alert('Přihlášení se nezdařilo, zkuste to znovu.');
+                var result = JSON.parse(xhr.response);
+                if (result.message){
+                    alert(result.message);
+                } else {
+				    alert('Přihlášení se nezdařilo, zkuste to znovu.');
+                }
 			},
 			complete: function() {
 				that.options.app.hideMask();
