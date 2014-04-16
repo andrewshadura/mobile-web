@@ -291,9 +291,14 @@ var AppController = Backbone.View.extend({
 	 * @param  {String} type [description]
 	 */
 	ajaxError: function(xhr, type) {
-		var data = JSON.parse(xhr.response);
-		if(data.message){
-			alert(data.message);
+		// Alert message from server
+		try{
+			var data = JSON.parse(xhr.response);
+			if(data.message){
+				alert(data.message);
+			}
+		} catch(e){
+			console.error(e);
 		}
 
 		switch (type){
