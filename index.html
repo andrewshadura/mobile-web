@@ -150,17 +150,17 @@
 				<a class="btn btn-default btn-sm fleft button-go" data-go="nearby">Kola okolo</a>
 				<h1>Půjčit si kolo</h1>
 			</header>
-			<p>Opište identifikátor z tabulky na kole a získáte kód zámku.</p>
-			<p>Od té chvíle máte kolo půjčené.</p>
+			<p>Opište šestimístný kód z tabulky na kole a získáte kód zámku.</p>
+			<p>Od té chvíle máte kolo půjčené. Poté budete mít možnost kolo vrátit umístěním šipky na mapu.</p>
 			<form action>
-				<input type="text" class="code form-control" placeholder="identifikátor kola">
+				<input type="number" class="code form-control" placeholder="identifikátor kola">
 				<input class="accessible" type="submit">
 			</form>
 			<a class="btn btn-primary button-getcode">Získat kód zámku</a>
 
-			<p><i>Na kole zkontroluj nafouknuté duše a utažení šroubů.</i>
+			<p><i>Na kole zkontrolujte nafouknuté duše a utažení šroubů.</i>
 			<% if((new Date).getHours() >= 20 || (new Date).getHours() <= 6){ %>
-				<p><b>Rozsviť světla!</b> Pokud je tma, bez světel nevyjížděj.
+				<p><b>Rozsviťte světla!</b> Pokud je tma, bez světel nevyjíždějte.
 			<% } %>
 		</script>
 
@@ -172,6 +172,7 @@
 				<p>Kód zámku</p>
 				<strong><%- bike.lockCode %></strong>
 				<p>Štastnou cestu!</p>
+				<p>Kolo <%- bike.name %> k vaším službám.</p>
 			</div>
 			<a class="btn btn-primary button-return">Vrátit kolo</a>
 			<a class="btn btn-default button-go" data-go="bike/<%- bike.id %>/report">Nahlásit problém</a>
@@ -222,7 +223,7 @@
 					<option value="Něco chybí">Něco chybí</option>
 					<option value="Tohle mají být brzdy?">Tohle mají být brzdy?</option>
 					<option value="Bál bych se na tom jet">Bál bych se na tom jet</option>
-					<option value="JIný problém">JIný problém</option>
+					<option value="JIný problém">Jiný problém</option>
 				</select>
 				<div class="checkbox">
 					<input type="checkbox" name="operational" id="operational">
