@@ -1,15 +1,13 @@
 module.exports = function(grunt) {
 
-	var SASS_FILES = {
-		'build/screen.css': 'sass/screen.sass'
-	};
+	var STYLE_FILES = {
+		'build/screen.css': 'styles/screen.styl'
+	}
 
 	var JS_FILES = {
 		'build/rekola.js': [
 			// Libraries
 			'libs/intel-appframework/appframework.min.js',
-			// 'libs/intel-appframework/ui/appframework.ui.min.js',
-			'libs/iscroll/dist/iscroll-lite-min.js',
 			'libs/underscore/underscore-min.js',
 			'libs/backbone/backbone-min.js',
 			// Configuration
@@ -25,27 +23,32 @@ module.exports = function(grunt) {
 			'router.js',
 			'init.js'
 		]
-	};
+	}
+
+	var WATCH_FILES = [
+		'build/*.*',
+		'**/*.html'
+	]
 
 	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
-		sass: {
+		stylus: {
 
 			dev: {
 				options: {
-					sourcemap: true
+					'include css': true,
+					compress: false
 				},
-				files: SASS_FILES
+				files: STYLE_FILES
 			},
 
 			dist: {
 				options: {
-					style: 'compressed',
-					noCache: true
+					'include css': true
 				},
-				files: SASS_FILES
+				files: STYLE_FILES
 			}
 
 		},
@@ -55,27 +58,48 @@ module.exports = function(grunt) {
 			dev: {
 				options: {
 					compress: false,
-					mangle: false,
-					beautify: true,
-					sourceMap: 'build/rekola.source-map.js'
+					sourceMap: true
 				},
 				files: JS_FILES
 			},
 
 			dist: {
-				options: {
-					report: 'min'
-				},
 				files: JS_FILES
+			}
+
+		},
+
+		browserSync: {
+
+			dev: {
+				options: {
+					watchTask: true,
+					debugInfo: true,
+					// Only static files
+					server: {
+						baseDir: '.'
+					},
+					// Dynamic files (PHP etc) - proxy to running server
+					// proxy: 'localhost',
+					ghostMode: {
+						clicks: true,
+						scroll: true,
+						links: false,
+						forms: true
+					}
+				},
+				bsFiles: {
+					src: WATCH_FILES
+				}
 			}
 
 		},
 
 		watch: {
 
-			sass: {
-				files: 'sass/**/*.sass',
-				tasks: ['sass:dev']
+			styles: {
+				files: 'styles/**/*.styl',
+				tasks: ['stylus:dev']
 			},
 
 			js: {
@@ -84,7 +108,7 @@ module.exports = function(grunt) {
 			},
 
 			livereload: {
-				files: ['build/*.css', 'build/*.js'],
+				files: WATCH_FILES,
 				options: {
 					livereload: true,
 				}
@@ -95,13 +119,15 @@ module.exports = function(grunt) {
 
 	});
 
-	// Load the plugin that provides the "uglify" task.
-	grunt.loadNpmTasks('grunt-contrib-sass');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-watch');
+	// Load the plugins
+	grunt.loadNpmTasks('grunt-contrib-stylus')
+	grunt.loadNpmTasks('grunt-contrib-uglify')
+	grunt.loadNpmTasks('grunt-browser-sync')
+	grunt.loadNpmTasks('grunt-contrib-watch')
+	grunt.loadNpmTasks('grunt-notify')
 
-	// Default task(s).
-	grunt.registerTask('default', ['sass:dist', 'uglify:dist']);
-	grunt.registerTask('dev', ['sass:dev', 'uglify:dev']);
+	// Register tasks
+	grunt.registerTask('default', ['stylus:dist', 'uglify:dist'])
+	grunt.registerTask('dev', ['stylus:dev', 'uglify:dev', 'browserSync:dev', 'watch'])
 
 };

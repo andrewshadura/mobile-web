@@ -20,7 +20,7 @@ h1, h2, h3, h4
 	font-size: 14px
 
 	header
-		+clearfix
+		clearfix()
 		display: block
 		position: fixed
 		left: 0
@@ -118,15 +118,15 @@ h1, h2, h3, h4
 
 
 .spin
-	+animation-name(spin)
-	+animation-duration(1s)
-	+animation-iteration-count(infinite)
-	+animation-timing-function(linear)
+	animation-name: spin
+	animation-duration: 1s
+	animation-iteration-count: infinite
+	animation-timing-function: linear
 
-+keyframes(spin)
+keyframes(spin)
 	from
-		+transform(rotate(360deg))
+		transform(rotate(360deg))
 	to
-		+transform(rotate(0deg))
+		transform(rotate(0deg))
 
 

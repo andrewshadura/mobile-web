@@ -18,22 +18,22 @@
 		width: 320px
 
 // Layout breakpoints
-$screen-break0: em(320)
-$screen-break1: em(480)
-$screen-break2: em(768)
-$screen-break3: em(992)
-$screen-break4: em(1200)
+$screen-break0 = em(320)
+$screen-break1 = em(480)
+$screen-break2 = em(768)
+$screen-break3 = em(992)
+$screen-break4 = em(1200)
 
-$screen: "only screen"
+$screen = "only screen"
 
-$break0: "only screen and (min-width:"#{$screen-break0}")"
-$break1: "only screen and (min-width:"#{$screen-break1}")"
-$break2: "only screen and (min-width:"#{$screen-break2}")"
-$break3: "only screen and (min-width:"#{$screen-break3}")"
-$break4: "only screen and (min-width:"#{$screen-break4}")"
+$break0 = "only screen and (min-width:" + $screen-break0 + ")"
+$break1 = "only screen and (min-width:" + $screen-break1 + ")"
+$break2 = "only screen and (min-width:" + $screen-break2 + ")"
+$break3 = "only screen and (min-width:" + $screen-break3 + ")"
+$break4 = "only screen and (min-width:" + $screen-break4 + ")"
 
-$landscape: "only screen and (orientation: landscape)"
-$portrait: "only screen and (orientation: portrait)"
+$landscape = "only screen and (orientation: landscape)"
+$portrait = "only screen and (orientation: portrait)"
 
 img
 	// Responsive images (ensure images don't scale beyond their parents)
@@ -55,9 +55,3 @@ img
 // WebKit bug documented here: https://bugs.webkit.org/show_bug.cgi?id=82489
 svg
 	max-height: 100%
-
-// Background size prefixes for Android 2.x
-=background-size($size)
-	+prefixer(background-size, $size, webkit spec)
-=box-shadow($size)
-	+prefixer(box-shadow, $size, webkit spec)
