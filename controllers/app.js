@@ -29,6 +29,11 @@ var AppController = Backbone.View.extend({
 		this.renderSubview(view, 'none');
 	},
 
+	renderConditions: function() {
+		var view = new ConditionsView({app: this});
+		this.renderSubview(view, 'none');
+	},
+
 	checkForRentedBike: function() {
 		var that = this;
 

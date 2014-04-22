@@ -5,6 +5,7 @@ var AppRouter = Backbone.Router.extend({
 	routes: {
 		'': 'index',
 		'login': 'login',
+		'conditions': 'conditions',
 		'nearby': 'nearby',
 		'bike/getcode': 'getcode',
 		'bike/:id': 'detail',
@@ -28,6 +29,10 @@ var AppRouter = Backbone.Router.extend({
 	login: function() {
 		console.log('router: login');
 		this.options.app.renderLogin();
+	},
+	conditions: function() {
+		console.log('router: conditions');
+		this.options.app.renderConditions();
 	},
 	nearby: function() {
 		console.log('router: nearby');

@@ -39,7 +39,13 @@ var LoginView = BasePanelView.extend({
 					localStorage.setItem(REKOLA.apiKey, result.apiKey);
 					that.options.app.apiKey = result.apiKey;
 					that.options.app.logged = true;
-					that.options.app.go('index');
+
+					if(!result.terms){
+						that.options.app.go('conditions');
+					} else {
+						that.options.app.go('index');
+					}
+
 				} else {
 					alert('Přihlášení se nezdařilo, zkuste to znovu.');
 				}
