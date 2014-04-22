@@ -4,29 +4,40 @@ var ConditionsView = BasePanelView.extend({
 	template: _.template($('#template-conditions').html()),
 
 	events: {
-		'change #agree': 'doAgree',
-		'submit form': 'doAgree'
+		'click .button-agree': 'doAgree',
+		'click .button-disagree': 'doDisagree'
 	},
 
 	doAgree: function(e) {
 		e.preventDefault();
-		var that = this;
-		var agree = $('#agree').val();
+		this.sendResponse(true);
+	},
+	doDisagree: function(e) {
+		e.preventDefault();
+		this.sendResponse(false);
+	},
 
-		that.app.ajax({
+	sendResponse: function(agreed) {
+		var that = this;
+		that.options.app.showMask('Odesílám...');
+		that.options.app.ajax({
 			type: 'POST',
 			url: REKOLA.remoteUrl + '/accounts/mine/terms',
-			data: JSON.stringify(agree),
+			data: JSON.stringify(true),
 			success: function(result) {
-				that.app.go('index');
+				if(agreed){
+					that.options.app.go('index');
+				} else {
+					localStorage.removeItem(REKOLA.apiKey);
+					this.options.app.apiKey = false;
+					this.options.app.logged = false;
+					this.options.app.go('login');
+				}
+			},
+			complete: function() {
+				that.options.app.hideMask();
 			}
 		});
-
 	},
-
-	initialize: function() {
-	},
-
-
 
 });
