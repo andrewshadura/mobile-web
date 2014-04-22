@@ -5,3 +5,6 @@
 build/*
 !build/.dir
 /config-local.js
+
+/index.html
+npm-debug.log

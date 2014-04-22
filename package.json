@@ -7,7 +7,10 @@
     "grunt-cli": "latest",
     "grunt-contrib-stylus": "latest",
     "grunt-contrib-uglify": "latest",
-    "bower": "latest"
+    "grunt-contrib-clean": "latest",
+    "bower": "latest",
+    "grunt-preprocess": "latest",
+    "grunt-hashres": "latest"
   },
   "devDependencies": {
     "grunt-contrib-watch": "latest",

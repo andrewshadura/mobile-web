@@ -34,6 +34,10 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
+		clean: {
+			build: 'build/*'
+		},
+
 		stylus: {
 
 			dev: {
@@ -95,6 +99,27 @@ module.exports = function(grunt) {
 
 		},
 
+		preprocess: {
+
+			index: {
+				src: 'index.tmpl',
+				dest: 'index.html'
+			}
+
+		},
+
+		hashres: {
+
+			dist: {
+				src: [
+					'build/screen.css',
+					'build/rekola.js'
+				],
+				dest: 'index.html'
+			}
+
+		},
+
 		watch: {
 
 			styles: {
@@ -105,6 +130,11 @@ module.exports = function(grunt) {
 			js: {
 				files: ['*.js', 'controllers/*.js', 'models/*.js', 'views/*.js'],
 				tasks: ['uglify:dev']
+			},
+
+			index: {
+				files: 'index.tmpl',
+				tasks: ['preprocess:index']
 			},
 
 			livereload: {
@@ -125,9 +155,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-browser-sync')
 	grunt.loadNpmTasks('grunt-contrib-watch')
 	grunt.loadNpmTasks('grunt-notify')
+	grunt.loadNpmTasks('grunt-preprocess')
+	grunt.loadNpmTasks('grunt-hashres')
+	grunt.loadNpmTasks('grunt-contrib-clean')
 
 	// Register tasks
-	grunt.registerTask('default', ['stylus:dist', 'uglify:dist'])
-	grunt.registerTask('dev', ['stylus:dev', 'uglify:dev', 'browserSync:dev', 'watch'])
+	grunt.registerTask('default', ['clean:build', 'stylus:dist', 'uglify:dist', 'preprocess:index', 'hashres:dist'])
+	grunt.registerTask('dev', ['clean:build', 'stylus:dev', 'uglify:dev', 'preprocess:index', 'browserSync:dev', 'watch'])
 
 };
