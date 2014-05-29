@@ -1,4 +1,5 @@
-# ReKola - Mobilní aplikace pro půjčování kol
+# ReKola - Mobilní webapp pro půjčování kol
+
 
 ## Konfigurace
 
@@ -24,11 +25,3 @@ Follow [Code Conventions](https://github.com/Clevis/Frontbase/wiki/Code-Conventi
 
 * `npm run-script build` - for project production build
 * `npm start` - start of development work which builds project with DEV settings and then watches for file change (browser-sync included)
-
-
-## Deploy
-Jsou tři servery:
-- PRODUCTION - ostrá verze dostupná z app.rekola.cz; u nás na VPSce ve složce rekola-mobile; stačí pushnout do větve DEPLOY_PRODUCTION
-- DEV - zkušební verze dostupná z vps.clevis.org/rekola-mobile-dev/; u nás na VPSce ve složce rekola-mobile-dev; stačí pushnout do větve DEPLOY_DEV
-- DEMO - ukázková verze pro novináře atd. má pozměněnou db s pár testovacími daty; deployovat zřídka; dostupná z vps.clevis.org/rekola-mobile-demo; u nás na VPSce ve složce rekola-mobile-demo; není hook, potřeba potvrdit na deployHQ`
-
